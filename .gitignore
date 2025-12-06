@@ -1,0 +1,21 @@
+# Node / JS
+node_modules/
+dist/
+build/
+.next/
+out/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# Mac / system files
+.DS_Store
+Thumbs.db
