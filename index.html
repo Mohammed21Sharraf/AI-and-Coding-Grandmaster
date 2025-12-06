@@ -5,50 +5,22 @@
 </head>
 
 <body>
-
-    <h2>Personal Details Form</h2>
-
-    <form>
-
-        <!-- Name -->
-        <label for="name">Full Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
-
-        <!-- Email -->
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
-
-        <!-- Masked Contact Number -->
-        <label for="contact">Contact Number:</label><br>
-        <input type="password" id="contact" name="contact" maxlength="10" required><br><br>
-
-        <!-- Gender -->
-        <label>Gender:</label><br>
-        <input type="radio" id="male" name="gender" value="Male">
-        <label for="male">Male</label><br>
-
-        <input type="radio" id="female" name="gender" value="Female">
-        <label for="female">Female</label><br>
-
-        <input type="radio" id="other" name="gender" value="Other">
-        <label for="other">Other</label><br><br>
-
-        <!-- Favourite City -->
-        <label for="city">Favourite City:</label><br>
-        <input type="radio" id="dhaka" name="dhaka" value="Dhaka">
-        <label for="dhaka">Dhaka</label><br>
-
-        <input type="radio" id="tokyo" name="tokyo" value="Tokyo">
-        <label for="tokyo">Tokyo</label><br>
-
-        <input type="radio" id="ohio" name="ohio" value="Ohio">
-        <label for="other">Ohio</label><br><br>
-
-        <br><br>
-
-        <button type="submit">Submit</button>
-
-    </form>
-
+  <form>
+    <fieldset>
+      <!-- The fieldset tag is used to group related elements in a form and draws a box around them-->
+      <legend>Personal Information:</legend>
+      <label>Full name:</label>
+      <!--placeholder attribute can be used to provide extra information about entry to be made-->
+      <input type="text" id="fname" placeholder="Enter Name"><br><br>
+      <label>Email:</label>
+      <input type="text" id="email"><br><br>
+      <label>Gender:</label><br>
+      <input type="radio" id="gender" value="female">Female<br>
+      <input type="radio" id="gender" value="male">Male<br>
+      <input type="radio" id="gender" value="other">Other<br><br>
+      <label>Birthday:</label>
+      <input type="date" id="birthday" name="birthday"><br><br>
+    </fieldset>
+  </form>
 </body>
 </html>
