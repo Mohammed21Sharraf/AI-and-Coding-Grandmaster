@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
+<head>
+</head>
 <body>
-
-    <h2>Operator</h2>
-    <p id="demo"></p>
+    <button onclick="myfunction(5)">Execute JS function</button>
 
     <script>
-        //--Addition--
-        //*use +, -, *, / operators*//
-        var x = 5;
-        var y = 2;
-        var z = x + y;
-        document.getElementById("demo").innerHTML = z;
+        function myfunction(x, y) {
+            // Check if the second argument (y) was provided
+            if (y === undefined) {
+                y = 2; // Default value if undefined
+            }
+            document.write(x * y);
+        }
     </script>
-
 </body>
 </html>
