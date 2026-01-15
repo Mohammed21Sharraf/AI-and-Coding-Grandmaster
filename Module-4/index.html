@@ -2,19 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dom!!!</title>
+    <title>Real Time Validation</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <p>Adding Js as seperate file</p>
-    <button type="button" onclick="myfunction()">Click Me!</button>
-    <p id="demo"></p>
 
-    <script src="script.js">
-    </script>
+    <h1>REAL TIME VALIDATION USING JS</h1>
+    <hr>
 
-    
+    <div class="login-container">
+        <form onsubmit="validate(event)">
+            <div class="input-row">
+                <label>Email:</label>
+                <input type="text" id="email">
+            </div>
+            
+            <div class="input-row">
+                <label>Password:</label>
+                <input type="password" id="password">
+            </div>
+            
+            <div class="input-row">
+                <label>Age:</label>
+                <input type="text" id="age">
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <p id="message"></p>
+
+    <script src="script.js"></script>
 </body>
 </html>
-
-
