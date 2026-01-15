@@ -1,25 +1,20 @@
-<!DOCTYPE html>
 <html>
+<head>
+    <title>JavaScript Math Object Methods</title>
+</head>
 <body>
+    <script type="text/javascript">
+        var value = Math.abs(20);
+        document.write("Demo Test Value : " + value + "<br>");
 
-    <h2>JavaScript Objects and its Properties</h2>
+        var value = Math.acos(-1);
+        document.write("Demo1 Test Value : " + value + "<br>");
 
-    <p>There are two different ways to access an object property</p>
-    <p>You can use .property or ["property"].</p>
+        var value = Math.asin(1);
+        document.write("Demo2 Test Value : " + value + "<br>");
 
-    <p id="demo"></p>
-
-    <script>
-        // Create an object:
-        var person = {
-            firstName: "I",
-            age: 24,
-        };
-
-        // Display some data from the object:
-        document.getElementById("demo").innerHTML = 
-        person.firstName + " am " + person.age + " years old";
+        var value = Math.atan(.5);
+        document.write("Demo3 Test Value : " + value + "<br>");
     </script>
-
 </body>
 </html>
