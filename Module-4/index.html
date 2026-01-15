@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Function Declaration</title>
-</head>
 <body>
-<center>
-    <h1 style="color:green">Codingal Education</h1>
-    <h3>Function Declaration</h3>
-    
+
+    <h2>JavaScript String Methods</h2>
+    <p>Basic Methods</p>
+
     <script>
-        var result = function (a, b) {return a * b} ;
-        document.write(result(5,10));
+        var str = "AmAzInG";
+        document.write(str.toUpperCase());
+        document.write("<br>");
+        document.write(str.toLowerCase());
+        document.write("<br>");
+        document.write(str.startsWith('i'));
+        document.write("<br>");
+
+        // Test Method -> returns true or false
+        var str1 = "I learnt about Methods";
+        var patt = new RegExp("about");
+        var res = patt.test(str1);
+        document.write(res);
     </script>
-</center>
+
 </body>
 </html>
