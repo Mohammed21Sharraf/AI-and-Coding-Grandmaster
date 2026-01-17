@@ -3,17 +3,20 @@
 
 <body>
 
-    <p>Multiply every element in the array with 10:</p>
-    <p id="product_value"></p>
+    <p>Click the button to evaluate/execute JavaScript code/expressions.</p>
+    <button onclick="myFunction()">Try it</button>
+    <p id="result"></p>
 
     <script>
-        var numbers = [28, 6, 19, 95];
-        function myFunction(num) {
-            return num * 10;
+        function myFunction() {
+            var x = 10;
+            var y = 20;
+            var a = eval("x + y") + "<br>";
+            var b = eval("2 * 2") + "<br>";
+            var c = eval("y - x") + "<br>";
+            var res = a + b + c;
+            document.getElementById("result").innerHTML = res;
         }
-        var newarray = numbers.map(myFunction);
-        document.getElementById("product_value").innerHTML =
-            newarray;
     </script>
 
 </body>
