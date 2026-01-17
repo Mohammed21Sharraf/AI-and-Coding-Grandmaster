@@ -3,26 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Types</title>
+    <title>document</title>
 </head>
 <body>
 
-    <h1>Javascript Data Types</h1>
-    <script>
-        var a = 8;
-        var b = 10;
-        var c =10;
-        var d = null;
-        var e;
+    <p>click the button to get a time-based greeting :</p>
+    <button onclick="myfunction()">Try it</button>
+    <p id="hour"></p>
+    <p id="greet"></p>
 
-        document.write("a and b are equal : " + (a==b)) ;
-        document.write("<br>") ;
-        document.write("b and c are equal : " + (b==c)) ;
-        document.write("<br>") ;
-        document.write("the value of d is : " + d ) ;
-        document.write("<br>") ;
-        document.write("The value of e is : " + e) ;
-        
+    <script>
+        function myfunction() {
+            var greeting;
+            var time = new Date().getHours();
+
+            if (time <12) {
+                greeting = "Good Morning";
+            }
+
+           else if (time <15) {
+                greeting = "Good Afternoon";
+            }
+
+            else if (time <19) {
+                greeting = "Good Evenning";
+            }
+
+            else  {
+                greeting = "Good Night";
+            }
+
+            document.getElementById("hour").innerHTML = "Current Hour is : " + time ;
+            document.getElementById("greet").innerHTML = greeting ;
+        }
     </script>
     
 </body>
