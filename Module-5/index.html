@@ -1,39 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<html>
 
 <body>
-    <h1>Javascript Class Static Methods</h1>
-    <p>A static method is created with the "static" keyword, and you can only call the method on the class itself.</p>
-    <p id="hello"></p>
-    <p id="hi"></p>
-    <p id="welcome"></p>
+
+    <h2>JavaScript Array Sort</h2>
+    <p>Click the button to sort the array in ascending order.</p>
+
+    <button onclick="ascending()">Ascending order</button>
+    <button onclick="descending()">Descending order</button>
+
+    <p id="result"></p>
+
     <script>
-        class Student {
-            constructor(name) {
-                this.studentname = name;
-            }
-            static hello() {
-                return "Hello!!";
-            }
-            static welcome(x) {
-                return "Welcome " + x.studentname;
-            }
-            hi() {
-                return "Hi " + this.studentname;
-            }
+        var points = [40, 100, 1, 5, 25, 10];
+        document.getElementById("result").innerHTML = points;
+
+        function ascending() {
+            points.sort(function (a, b) { return a - b });
+            document.getElementById("result").innerHTML = points;
         }
 
-        let myname = new Student("Carol");
-        document.getElementById("hello").innerHTML = Student.hello();
-        document.getElementById("hi").innerHTML = myname.hi();
-        document.getElementById("welcome").innerHTML = Student.welcome(myname);
+        function descending() {
+            points.sort(function (a, b) { return b - a });
+            document.getElementById("result").innerHTML = points;
+        }
     </script>
+
 </body>
 
 </html>
