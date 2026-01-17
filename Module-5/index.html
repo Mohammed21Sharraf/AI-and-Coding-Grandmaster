@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
 <body>
+    <h1>Javascript Class Static Methods</h1>
+    <p>A static method is created with the "static" keyword, and you can only call the method on the class itself.</p>
+    <p id="hello"></p>
+    <p id="hi"></p>
+    <p id="welcome"></p>
+    <script>
+        class Student {
+            constructor(name) {
+                this.studentname = name;
+            }
+            static hello() {
+                return "Hello!!";
+            }
+            static welcome(x) {
+                return "Welcome " + x.studentname;
+            }
+            hi() {
+                return "Hi " + this.studentname;
+            }
+        }
 
-<h2>JavaScript Class Inheritance</h2>
-<p>Use the "extends" keyword to inherit all methods from another class.</p>
-<p>Use the "super" method to call the parent's constructor function.</p>
-<p id="details"></p>
-
-<script>
-class Car {
-  constructor (brand) {
-    this.carname = brand;
-  }
-  present() {
-    return 'I have a ' + this.carname;
-  }
-}
-
-class Model extends Car {
-  constructor (brand, mod) {
-    super(brand);
-    this.model = mod;
-  }
-  show() {
-    return this.present()+", it is a " + this.model;
-  }
-}
-
-let myCar = new Model ("Ford", "Mustang");
-document.getElementById("details").innerHTML = myCar.show();
-</script>
-
+        let myname = new Student("Carol");
+        document.getElementById("hello").innerHTML = Student.hello();
+        document.getElementById("hi").innerHTML = myname.hi();
+        document.getElementById("welcome").innerHTML = Student.welcome(myname);
+    </script>
 </body>
+
 </html>
