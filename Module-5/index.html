@@ -3,14 +3,14 @@
 
 <body>
 
-    <h2>JavaScript Arrow Function</h2>
-    <p>This example shows an Arrow Function with a
-        parameter.</p>
+    <h2>Convert a JavaScript object into a JSON string, and send it to the server.</h2>
     <p id="result"></p>
 
     <script>
-        const add = (a, b) => a + b;
-        document.getElementById("result").innerHTML = add(4, 6);
+        var myObj = { name: "Sharraf", age: 12, grade: 7 };
+        var myJSON = JSON.stringify(myObj);
+        var newObj = JSON.parse(myJSON);
+        document.getElementById("result").innerHTML = newObj.name;
     </script>
 
 </body>
