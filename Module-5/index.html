@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <body>
 
-<h2>The JavaScript String() Method</h2>
-<p>The String() method can convert a number to a string.</p>
-<p id="number_result"></p>
-<p id="string_result"></p>
+    <h2>JavaScript Error Handling</h2>
+    <p>This example demonstrates how to use <b>catch</b> to
+        diplay an error.</p>
 
-<script>
-var x = 70;
-var y = 90;
-document.getElementById("number_result").innerHTML = x + y;
-document.getElementById("string_result").innerHTML = String(x) + String(y);
-</script>
+    <p id="error_message"></p>
+
+    <script>
+        try {
+            addalert("Welcome guest!");
+        }
+        catch (err) {
+            document.getElementById("error_message").innerHTML =
+                err.message;
+        }
+    </script>
 
 </body>
+
 </html>
