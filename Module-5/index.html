@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html>
-
+<head>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-
-    <p>Enter a number and click OK:</p>
-    <input id="id1" type="number" min="100" max="300" required>
-    <button onclick="myFunction()">OK</button>
-
-    <p>If the number is less than 100 or greater than 300, an error message
-        will be displayed.</p>
-    <p id="result"></p>
-
-    <script>
-        function myFunction() {
-            var inpObj = document.getElementById("id1");
-            if (!inpObj.checkValidity()) {
-                document.getElementById("result").innerHTML =
-                    inpObj.validationMessage;
-            } else {
-                document.getElementById("result").innerHTML = "Input OK";
-            }
-        }
-    </script>
-
+    <div class="calculator-container">
+        <input type="text" id="result" class="calculator-display" value="" readonly>
+        <div class="buttons-grid">
+            <button onclick="setScreenValue('7')">7</button>
+            <button onclick="setScreenValue('8')">8</button>
+            <button onclick="setScreenValue('9')">9</button>
+            <button onclick="setScreenValue('/')" class="operator">/</button>
+            <button onclick="setScreenValue('4')">4</button>
+            <button onclick="setScreenValue('5')">5</button>
+            <button onclick="setScreenValue('6')">6</button>
+            <button onclick="setScreenValue('*')" class="operator">*</button>
+            <button onclick="setScreenValue('1')">1</button>
+            <button onclick="setScreenValue('2')">2</button>
+            <button onclick="setScreenValue('3')">3</button>
+            <button onclick="setScreenValue('-')" class="operator">-</button>
+            <button onclick="setScreenValue('0')">0</button>
+            <button onclick="setScreenValue('.')">.</button>
+            <button onclick="calculateResult()" class="equals-btn">=</button>
+            <button onclick="setScreenValue('+')" class="operator">+</button>
+        </div>
+        <button onclick="clearScreen()" class="clear-btn">CLEAR</button>
+    </div>
+    <script src="script.js"></script>
 </body>
-
 </html>
