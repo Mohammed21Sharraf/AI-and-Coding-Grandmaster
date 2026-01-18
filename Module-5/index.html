@@ -3,14 +3,19 @@
 
 <body>
 
-    <h2>Convert a JavaScript object into a JSON string, and send it to the server.</h2>
-    <p id="result"></p>
+    <h2>JavaScript async / await</h2>
+    <h1 id="result"></h1>
 
     <script>
-        var myObj = { name: "Sharraf", age: 12, grade: 7 };
-        var myJSON = JSON.stringify(myObj);
-        var newObj = JSON.parse(myJSON);
-        document.getElementById("result").innerHTML = newObj.name;
+        async function add(a, b) {
+            let response = await a + b;
+            display(response);
+        }
+        function display(some) {
+            document.getElementById("result").innerHTML =
+                some;
+        }
+        add(5, 10);
     </script>
 
 </body>
