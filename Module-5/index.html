@@ -2,35 +2,19 @@
 <html>
 
 <body>
-
-    <h2>JavaScript Promise</h2>
-    <p id="demo"></p>
-
+    <h2>JavaScript Callbacks</h2>
+    <p>Do a calculation and then display the result.</p>
+    <p id="result"></p>
     <script>
-        function myDisplayer(some) {
-            document.getElementById("demo").innerHTML = some;
+        function myDisplayer(value) {
+            document.getElementById("result").innerHTML = value;
         }
-
-        function sum(a, b) {
-            var sum = a + b;
-            myDisplayer(sum);
+        function myCalculator(num1, num2, myCallback) {
+            let sum = num1 + num2;
+            myCallback(sum);
         }
-
-        let myPromise = new Promise(function (myResolve, myReject) {
-            let x = 0;
-            if (x = 0) {
-                myResolve("OK");
-            } else {
-                myReject("Error");
-            }
-        });
-
-        myPromise.then(
-            function (value) { sum(5, 5); },
-            function (error) { sum(error); }
-        );
+        myCalculator(9, 5, myDisplayer);
     </script>
-
 </body>
 
 </html>
