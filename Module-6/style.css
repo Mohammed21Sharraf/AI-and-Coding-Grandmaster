@@ -1,47 +1,51 @@
-html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    background: #252525;
-  }
-  /* Main Heading Font */
-  .m-heading {
-    font-family: "Roboto Slab", serif;
-  }
-  .text-white{
-      color: white;
-  }
-  /* Main Container height*/
-  .main-container {
-    height: 100vh;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: url('1.png');
-    background-attachment: fixed;
-    background-size: cover;
-  }
-  
-  /* Aligning items in main row */
-  .main_row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   
-  }
-  
-  /* Changing Name Font sixe */
-  .main_row h1 {
-    font-size: 5rem;
-   
-  }
-  
-  /* Making the main image the size of the screen */
-  .main_row img {
-    width: auto;
-    height: 100vh;
-   
-  }
-  
+/* Container styling for the dark navy background */
+body {
+    background-color: #2d344b; 
+}
+#social-media {
+     /* Matches the dark navy in image_1b4ef1.png */
+    min-height: 300px;
+}
+
+/* Heading style for the main title */
+.m-heading {
+    font-family: 'Barlow TT', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+/* Base button styling for LinkedIn, Youtube, etc. */
+.media_link {
+    border: 2px solid #ffc107; /* Matches the yellow border in image_1b4ef1.png */
+    border-radius: 8px;
+    padding: 15px;
+    margin-right: 15px; /* Adds spacing between the columns */
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.media_link:hover {
+    background-color: rgba(255, 193, 7, 0.1);
+    text-decoration: none;
+}
+
+/* Specific text styling inside buttons */
+.media_link h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* Handling the secondary color of Font Awesome icons */
+.media_link i {
+    opacity: 0.7; /* Gives the icons that slightly dimmed look */
+}
+
+/* Special styling for the Email button which uses bg-warning in your HTML */
+.media_link.bg-warning {
+    border: none; /* Solid buttons usually don't need a border */
+}
+
+.media_link.bg-warning h3, 
+.media_link.bg-warning i {
+    color: #2d344b !important; /* Forces dark color for readability on yellow background */
+}
