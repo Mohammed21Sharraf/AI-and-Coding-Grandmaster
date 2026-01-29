@@ -1,0 +1,32 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1d1d1d; /* Dark background from the image */
+    font-family: 'Baloo Tamma 2', cursive;
+}
+
+.navigation {
+    background-color: #252525; /* Slightly lighter header background */
+    border-bottom: 1px solid #444;
+}
+
+.navigation-link {
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.navigation-link:hover {
+    color: #ffc107 !important; /* Yellow hover effect matching the logo */
+    text-decoration: none;
+}
+
+h5 {
+    letter-spacing: 1px;
+    font-weight: 700;
+}
