@@ -1,11 +1,12 @@
-num = int(input("Enter number to check :"))
+import datetime  
+    
+# using now() to get current time  
+current_time = datetime.datetime.now()  
+    
+# Printing value of now.  
+print ("Time now at greenwich meridian is : ", end = "")   
+print (current_time)
 
-if num>50:
-	print("Number is greater than 50")
-	if num%2==0:
-		print("And it is even too")
-	else:
-		print("And it is odd")
-
-else:
-	print("Number is less than 50")
+# print calendar of year 2021
+import calendar
+print("\n", calendar.calendar(2026))
