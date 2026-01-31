@@ -1,12 +1,8 @@
-# Take input values from user
-x = input("Enter Value of x:")
-y = input("Enter Value of y:")
+number = int(input("Enter Number to check"))
+print("Number to be checked :", number)
 
-# Swapping
-temp = x
-x = y
-y = temp
+if number%2==0 :
+  print("This is an even number")
 
-# Displaying results after swapping
-print("value of x after swapping", x)
-print("value of y after swapping", y)
+else:
+  print("This is an odd number")
