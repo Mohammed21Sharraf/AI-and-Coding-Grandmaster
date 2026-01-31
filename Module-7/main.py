@@ -1,25 +1,22 @@
-# Program make a simple calculator
+import turtle
 
-# This function adds two numbers
-def add(x, y):
-    return x + y
+# creating canvas
+# You can combine these:
+sc = turtle.Screen()
+sc.bgcolor("Orange")
+sc.setup(400, 300)
 
-# This function subtracts two numbers
-def subtract(x, y):
-    return x - y
+turtle.title("Welcome to Turtle Window")
 
-# This function multiplies two numbers
-def multiply(x, y):
-    return x * y
+# turtle object creation
+board = turtle.Turtle()
 
-# This function divides two numbers
-def divide(x, y):
-    return x / y
+# creating a square
+for i in range(4):
+    board.forward(100)
+    board.left(90)
+    # Note: In Python, 'i' increments automatically in a range loop, 
+    # so 'i = i + 1' isn't needed here.
 
-num1 = int(input("Enter Number 1"))
-num2 = int(input("Enter Number 2"))
-
-print("Sum :", add(num1, num2))
-print("Difference :", subtract(num1, num2))
-print("Product :", multiply(num1, num2))
-print("Quotient :", divide(num1, num2))
+# THE MISSING LINE:
+turtle.done()
