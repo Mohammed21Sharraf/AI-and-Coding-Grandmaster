@@ -1,28 +1,33 @@
-lst = ['Apple', 'Guava', 'Mango', 'Banana', 'Kiwi']
+# empty dictionary
+my_dict = {}
 
-print("Length of list:", len(lst))
-print("First Element:", lst[0])
-print("Last Element:", lst[-1])
+# dictionary with integer keys
+my_dict = {1: 'apple', 2: 'ball'}
 
-lst.append('Papaya')
-print("Updated List :", lst)
+# dictionary with mixed keys
+my_dict = {'name': 'John', 1: [2, 4, 3]}
 
-lst.remove('Guava')
-print("Updated List :", lst)
+my_dict = {'name': 'Jack', 'age': 26}
 
-lst.sort()
-print("Sorted List:", lst)
+# Output: Jack
+print(my_dict['name'])
+print(my_dict.get('age'))
 
-lst.pop(1)
-print("Updated List :", lst)
+# update value
+my_dict['age'] = 27
+print(my_dict)
 
-lst.reverse()
-print("Reversed List :", lst)
+# add item
+my_dict['address'] = 'Downtown'
+print(my_dict)
 
-print("Multiplication on List :", lst*2)
+# remove particular element
+my_dict.pop('age')
+print(my_dict)
 
-lst = lst[:4]
-print("Sliced List :", lst)
+# access a particular element
+print("Address :", my_dict.get('address'))
 
-lst.clear()
-print("Updated List :", lst)
+# remove all the elements
+my_dict.clear()
+print(my_dict)
