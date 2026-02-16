@@ -1,16 +1,25 @@
-import tkinter as tk
+# Make sure you upload image in your current Repl
+# Import all the necessary libraries
+# PIL (Python Imaging Library) provides image editing capabilities to the python interpreter 
+from tkinter import *
+from PIL import Image, ImageTk
 
-window = tk.Tk()
+# Create a window with a title bar and set its geometry as well
+root = Tk()
+root.title('image')
+root.geometry('400x400')
 
-for i in range(3):
-    for j in range(3):
-        frame = tk.Frame(
-            master=window,
-            relief=tk.RAISED,
-            borderwidth=1
-        )
-        frame.grid(row=i, column=j, padx=5, pady=5)
-        label = tk.Label(master=frame, text=f"Row {i}\nColumn {j}")
-        label.pack()
+# Now use Image.open to open and identify the given image file. 
+upload = Image.open("img.jpg")
 
-window.mainloop()
+# Convert this Image to Tkinter compatible image
+image = ImageTk.PhotoImage(upload)
+
+# Add image to Tkinter Label
+label = Label(root, image=image, height=350, width=300)
+label.place(x=50, y=0)
+label2 = Label(root, text="This is how you add image in Tkinter Window")
+label2.place(x=40, y=360)
+
+# Run the application
+root.mainloop()
