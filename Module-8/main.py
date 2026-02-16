@@ -1,30 +1,21 @@
-class Cat:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
+class Computer:
 
-    def info(self):
-        print(f"I am a cat. My name is {self.name}. I am {self.age} years old.")
+    def __init__(self):
+        self.__maxprice = 900
 
-    def make_sound(self):
-        print("Meow")
+    def sell(self):
+        print("Selling Price: {}".format(self.__maxprice))
 
+    def setMaxPrice(self, price):
+        self.__maxprice = price
 
-class Dog:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
+c = Computer()
+c.sell()
 
-    def info(self):
-        print(f"I am a dog. My name is {self.name}. I am {self.age} years old.")
+# change the price
+c.__maxprice = 1000
+c.sell()
 
-    def make_sound(self):
-        print("Bark")
-
-
-cat1 = Cat("Dodo", 2.5)
-dog1 = Dog("Tyson", 8)
-
-for animal in (cat1, dog1):
-    animal.make_sound()
-    animal.info()
+# using setter function
+c.setMaxPrice(1000)
+c.sell()
