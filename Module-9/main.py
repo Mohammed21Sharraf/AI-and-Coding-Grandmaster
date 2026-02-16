@@ -1,25 +1,22 @@
-# Make sure you upload image in your current Repl
-# Import all the necessary libraries
-# PIL (Python Imaging Library) provides image editing capabilities to the python interpreter 
+# Import necessary libraries
 from tkinter import *
-from PIL import Image, ImageTk
+from tkinter import messagebox
 
-# Create a window with a title bar and set its geometry as well
+# Setup Tkinter Window
 root = Tk()
-root.title('image')
-root.geometry('400x400')
+root.geometry("200x200")
 
-# Now use Image.open to open and identify the given image file. 
-upload = Image.open("img.jpg")
+# Function for Displaying Warning Message
+# This will be called once the button is clicked
+# messagebox.showwarning("Window Name", "Text to be displayed")
+def msg():
+	messagebox.showwarning("Alert", "Stop! Virus Found.")
 
-# Convert this Image to Tkinter compatible image
-image = ImageTk.PhotoImage(upload)
+# Adding Button Widget to Window
+button = Button(root, text="Scan for Virus", command=msg)
+button.place(x=40, y=80)
 
-# Add image to Tkinter Label
-label = Label(root, image=image, height=350, width=300)
-label.place(x=50, y=0)
-label2 = Label(root, text="This is how you add image in Tkinter Window")
-label2.place(x=40, y=360)
-
-# Run the application
+# Entering main event loop
 root.mainloop()
+
+
