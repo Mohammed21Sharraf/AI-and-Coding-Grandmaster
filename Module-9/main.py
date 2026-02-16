@@ -1,26 +1,19 @@
-# Program to eliminate repeated lines from a file
+# Program to merge two files into a third file
 
-# creating the output file
-outputFile = open('UpdatedFile.txt', "w")
 
-# reading the input file
-inputFile = open('Repeated.txt', "r")
+# Reading data from file1
+with open('Codingal.txt') as fp:
+	data1 = fp.read()
 
-# holds lines already seen
-lines_seen_so_far = set()
-print("Eliminating duplicate lines....")
-# iterating each line in the file
-for line in inputFile:
+# Reading data from file2
+with open('sample_doc.txt') as fp:
+	data2 = fp.read()
 
-	# checking if line is unique
-	if line not in lines_seen_so_far:
-
-		# write unique lines in output file
-		outputFile.write(line)
-
-		# adds unique lines to lines_seen_so_far
-		lines_seen_so_far.add(line)		
-
-# closing the file
-inputFile.close()
-outputFile.close()
+# Merging 2 files
+# To add the data of file2
+# from next line
+data1 += "\n"
+data1 += data2
+print("Merging two files....")
+with open ('MergedFile.txt', 'w') as fp:
+	fp.write(data1)
