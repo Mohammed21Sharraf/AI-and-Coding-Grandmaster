@@ -1,19 +1,21 @@
-# Program to merge two files into a third file
+from tkinter import *
 
+window = Tk()
+window.title('Tkinter Sample Window')
+window.geometry('300x300')
 
-# Reading data from file1
-with open('Codingal.txt') as fp:
-	data1 = fp.read()
+greeting = Label(text="Hello User", fg='black', bg='white')
+button = Button(text="Click me", bg='black', fg='white')
+entry = Entry(fg="yellow", bg="blue", width=50)
+greeting.pack()
+button.pack()
+entry.pack()
 
-# Reading data from file2
-with open('sample_doc.txt') as fp:
-	data2 = fp.read()
+frame = Frame(master=window, relief=RAISED, borderwidth=5)
+frame.pack()
+label = Label(master=frame, text='Sample Frame')
+label.pack()
 
-# Merging 2 files
-# To add the data of file2
-# from next line
-data1 += "\n"
-data1 += data2
-print("Merging two files....")
-with open ('MergedFile.txt', 'w') as fp:
-	fp.write(data1)
+textbox = Text(fg='green', bg='yellow')
+textbox.pack()
+
