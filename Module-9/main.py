@@ -1,25 +1,33 @@
-# Program to remove lines starting with any prefix
+# Program to copy odd lines of one file to another
+# open file in read mode
+fn = open('Codingal.txt', 'r')
 
-file1 = open('Codingal.txt',
-			'r')
-file2 = open('CodingalUpdated.txt',
-			'w')
+# open other file in write mode
+fn1 = open('CodingalUpdated.txt', 'w')
 
-# reading each line from original
-# text file
-for line in file1.readlines():
-	
-	# reading all lines that do not
-	# begin with "Coding"
-	if not (line.startswith('Coding')):
-		
-		# printing those lines
-		print(line)
-		
-		# storing only those lines that
-		# do not begin with "Coding"
-		file2.write(line)
+# read the content of the file line by line
+cont = fn.readlines()
+type(cont)
+for i in range(1, len(cont)+1):
+	if(i % 2 != 0):
+		fn1.write(cont[i-1])
+	else:
+		pass
 
-# close and save the files
-file2.close()
-file1.close()
+# close the file
+fn1.close()
+
+# open file in read mode
+fn1 = open('CodingalUpdated.txt', 'r')
+
+# read the content of the file
+cont1 = fn1.read()
+
+# print the content of the file
+print(cont1)
+
+# close all files
+fn.close()
+fn1.close()
+
+
