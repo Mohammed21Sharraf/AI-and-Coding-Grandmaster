@@ -1,43 +1,30 @@
-# import necessary packages
-from abc import ABC, abstractmethod
-# create a base class
-class Animal(ABC):
+class Cat:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-    # abstract method
-	# should be implemented by all sub-classes
-	def move(self):
-		pass
+    def info(self):
+        print(f"I am a cat. My name is {self.name}. I am {self.age} years old.")
 
-# sub classes
-class Human(Animal):
+    def make_sound(self):
+        print("Meow")
 
-	def move(self):
-		print("I can walk and run")
 
-class Snake(Animal):
+class Dog:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-	def move(self):
-		print("I can crawl")
+    def info(self):
+        print(f"I am a dog. My name is {self.name}. I am {self.age} years old.")
 
-class Dog(Animal):
+    def make_sound(self):
+        print("Bark")
 
-	def move(self):
-		print("I can bark")
 
-class Lion(Animal):
+cat1 = Cat("Dodo", 2.5)
+dog1 = Dog("Tyson", 8)
 
-	def move(self):
-		print("I can roar")
-		
-# Driver code
-R = Human()
-R.move()
-
-K = Snake()
-K.move()
-
-R = Dog()
-R.move()
-
-K = Lion()
-K.move()
+for animal in (cat1, dog1):
+    animal.make_sound()
+    animal.info()
