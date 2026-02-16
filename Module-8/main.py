@@ -1,20 +1,12 @@
-class Parrot:
-    
-    # instance attributes
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-    
-    # instance method
-    def sing(self, song):
-        return "{} sings {}".format(self.name, song)
+class Employee:
 
-    def dance(self):
-        return "{} is now dancing".format(self.name)
+	# Initializing (Constructor)
+	def __init__(self):
+		print('Employee created.')
 
-# instantiate the object
-blu = Parrot("Blu", 10)
+	# Deleting (Destructor)
+	def __del__(self):
+		print('Destructor called, Employee deleted.')
 
-# call our instance methods
-print(blu.sing("'Happy'"))
-print(blu.dance())
+obj = Employee()
+del obj
