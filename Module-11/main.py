@@ -1,15 +1,29 @@
-# Program to check if user input numbers are equal without using any comparison operator. 
+# Program to find the element not making a pair
  
-def checkIfSame(number1, number2):
+# Function to calculate the number that is odd occurring 
  
-# User XOR operator as a^a is always 0 
- if ((number1 ^ number2) != 0):
-    print("Numbers are not equal")
- else:
-    print("Both numbers are equal")
+def OddOccurring(arr):
  
-# Taking input
-number1 = int(input("Enter first number to compare : "))
-number2 = int(input("Enter second number to compare : "))
+    # Initialize result
+    res = 0
+     
+    # Traverse the array
+    for element in arr:
+        # XOR with the result
+        res = res ^ element
  
-checkIfSame(number1, number2)
+    return res
+ 
+# Initialize our array
+arr = []
+ 
+# Take array size as input
+n = int(input("Enter array size : "))
+ 
+# Take array element input 
+while(n):
+    num = int(input("Enter number : "))
+    arr.append(num)
+    n-=1
+ 
+print("\n\nOdd occurring number is : ",OddOccurring(arr))
