@@ -1,32 +1,26 @@
-# Program to divide two numbers without using the division operator
+# Program to find power set of a set
  
-def divide(ourDividend, ourDivisor):
+import math;
+ 
+def printPowerSet(set,SetSize):
     
-    # Check if divisor is +ve or -ve
-    sign = (-1 if((ourDividend < 0) ^
-                (ourDivisor < 0)) else 1);
+    # Find total elements possible in the power set
+    PowerSetSize = (int) (math.pow(2, SetSize));
+    outer = 0;
+    inner = 0;
     
-    # Make both positive
-    ourDividend = abs(ourDividend);
-    ourDivisor = abs(ourDivisor);
-    
-    quotientNumber = 0
-    tempNumber = 0
-    
-    # Go from 31 to 0 and accumulate all valid bits
+    for outer in range(0, PowerSetSize):
+        for inner in range(0, SetSize):
+            # Check if inner bit in the outer is set If set then print inner element from set
+            if((outer & (1 << inner)) > 0):
+                print(set[inner], end = "")
+        print("")
  
-    for i in range(31, -1, -1):
+size = int(input("Enter array size : "))
  
-        if (tempNumber + (ourDivisor << i) <= ourDividend):
-            tempNumber += ourDivisor << i
-            quotientNumber |= 1 << i
+set = []
+for i in range(0,size):
+    n = int(input("Enter element : "))
+    set.append(n)
  
-    # Assuming the sign value computed earlier is -1, negate the quotient value
-    if sign ==-1 :
-        quotientNumber=-quotientNumber
-    return quotientNumber
- 
- 
-a = int(input("Enter a for a/b : "))
-b = int(input("Enter b for a/b : "))
-print("Result of ",a,"/",b,"is",divide(a, b))
+printPowerSet(set, len(set))
