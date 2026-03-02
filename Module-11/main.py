@@ -1,24 +1,19 @@
-# Program to computer x^y without using math function
+# Program to swap two numbers without using 3rd variable 
  
+def swap1(a,b):
  
-def computePower( x, y):
+    # Code to swap 'a' and 'b'
+    a = a ^ b 
+    b = a ^ b
+    a = a ^ b 
+    print ("After Swapping: a = ", a, " b =", b)
  
-    # Default total is 1
-    result = 1
+def swap2(a, b):
  
-    while (y > 0):
-        # If y is even 
-        if (y % 2 == 0):
-            x = x * x
-            y>>=1
-        
-        else:
-            result = result * x
-            y = y - 1
-        
-    return result
+    a = (a & b) + (a | b)
+    b = a + (~b) + 1
+    a = a + (~b) + 1
+    print ("After Swapping: a = ", a, " b =", b)
  
- 
-x = int(input("Enter x for x^y : "))
-y = int(input("Enter y for x^y : "))
-print("Total : ",(computePower(x, y)))
+swap1(1,2)
+swap2(1,2)
