@@ -1,14 +1,15 @@
-# Program to check if the Nth bit is set or not 
+# Program to check if user input numbers are equal without using any comparison operator. 
  
-def setOrNot(number, n):
+def checkIfSame(number1, number2):
  
-    # Make a mask variable by left shifting 1 (k-1) times and check if (n AND mask) equals 1 or 0
-    if number & (1 << (n - 1)):
-        print( "\nSET")
-    else:
-        print("\nNOT SET")
+# User XOR operator as a^a is always 0 
+ if ((number1 ^ number2) != 0):
+    print("Numbers are not equal")
+ else:
+    print("Both numbers are equal")
  
+# Taking input
+number1 = int(input("Enter first number to compare : "))
+number2 = int(input("Enter second number to compare : "))
  
-number = int(input("Enter number : "))
-n = int(input("Enter bit number : "))
-setOrNot(number, n)
+checkIfSame(number1, number2)
