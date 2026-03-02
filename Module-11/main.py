@@ -1,29 +1,38 @@
-# Program to find the element not making a pair
+# Program to find two numbers that are odd occurring 
  
-# Function to calculate the number that is odd occurring 
- 
-def OddOccurring(arr):
- 
-    # Initialize result
-    res = 0
+def printTwoOdd(arr, size):
      
-    # Traverse the array
-    for element in arr:
-        # XOR with the result
-        res = res ^ element
+    # xorof2 will hold xor of the 2 odd occurring numbers
+    xorof2 = arr[0]
  
-    return res
+    # These will hold 2 odd occurring numbers
+    x = 0
+    y = 0
  
-# Initialize our array
+    # This will hold the rightmost set bot from xorof2
+    bit = 0
+ 
+    for i in range(1, size):
+        xorof2 = xorof2 ^ arr[i]
+ 
+    setbit = xorof2 & ~(xorof2 - 1)
+    
+    # If number is haivng set bit at location we need then XOR it with x else y
+    for i in range(size):
+        if(arr[i] & setbit):
+            x = x ^ arr[i]
+        else:
+            y = y ^ arr[i]
+ 
+    print("The two ODD elements are", x, "&", y)
+ 
+# Create an empty array
 arr = []
  
-# Take array size as input
-n = int(input("Enter array size : "))
- 
-# Take array element input 
-while(n):
-    num = int(input("Enter number : "))
-    arr.append(num)
-    n-=1
- 
-print("\n\nOdd occurring number is : ",OddOccurring(arr))
+# Take array size and elements as input
+arr_size = int(input("Enter size of the array : "))
+for i in range(0,arr_size):
+    z = int(input("Enter element : "))
+    arr.append(z)
+    
+printTwoOdd(arr, arr_size)
