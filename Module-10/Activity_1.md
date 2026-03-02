@@ -1,69 +1,33 @@
-def fun1(n):
+def sum_n(n):
+    return n * (n + 1) // 2  # integer result
 
-    return n*(n+1)/2
-
-print(fun1(4))
- 
-
-For function1, the Algorithm goes like this:
+print("Sum of first n numbers (n=5):", sum_n(5))
 
  
 
-(4*5) / 2
+Space complexity: θ(1), Auxiliary space = θ(1)
+
+Linear space :
 
  
 
-So, the number of iterations will be 1 for any input.
+def array_sum(a):
+    total = 0
+    for i in a:
+        total += i
+    return total
 
+# Examples
+a = [12, 3, 4, 15]
+print("Array sum:", array_sum(a))
  
 
-def fun2(n):
+With the size of the array, the space also required increases.
 
-    sum=0
+Space complexity: θ(n), Auxiliary space = θ(1)
+def summ(n):
+    if n <= 0:
+        return 0
+    return n + summ(n - 1)
 
-    for i in range(1,n+1):
-
-        sum+=i
-
-    return sum
-
-
-print(fun2(4))
- 
-
-For function2 the Algorithm goes like:
-
- 
-
-1 + 2 + 3 + 4
-
- 
-
-So, number of iterations will be 1 + 1 + 1 + 1 = 4 = n(input) iterations
-
- 
-
-def fun3(n):
-
-    sum=0
-
-    for i in range(1,n+1):
-
-        for j in range(1,i+1):
-
-            sum+=1
-
-    return sum
-
-print(fun3(4))
- 
-
-For function2 the Algorithm goes like:
-
- 
-
-1  +  (1+1)   +   (1+1+1)  +  (1+1+1+1)
-
- 
-
-So, number of iterations will be 1 + 2 + 3+ 4=10;
+print("Recursive sum (n=5):", summ(5))
