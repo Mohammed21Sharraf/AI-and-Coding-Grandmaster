@@ -1,17 +1,18 @@
-# Program to check if the user entered number is odd or even using only bitwise operator
+# Program to find the number of bits present in a number
  
-# Returns true if n is even, else odd
-def isEvenOdd( n) :
-    # XOR with 1 equals n+1
-    if (n ^ 1 == n + 1) :
-        return True;
-    else :
-        return False;
+# Functions taking our number as input 
+def numberOfBits(n):
+    
+    # Count variable set as 0 
+    count = 0
+ 
+    # Right shift the number till it becomes 0
+    while (n):
+        count += 1
+        n >>= 1
+         
+    return count
  
  
 number = int(input("Enter your number : "))
- 
-if isEvenOdd(number):
-    print(number," is Even")
-else:
-    print(number," is Odd")
+print("Total bits : ",numberOfBits(number))
