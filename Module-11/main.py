@@ -1,19 +1,32 @@
-# Program to swap two numbers without using 3rd variable 
+# Program to divide two numbers without using the division operator
  
-def swap1(a,b):
+def divide(ourDividend, ourDivisor):
+    
+    # Check if divisor is +ve or -ve
+    sign = (-1 if((ourDividend < 0) ^
+                (ourDivisor < 0)) else 1);
+    
+    # Make both positive
+    ourDividend = abs(ourDividend);
+    ourDivisor = abs(ourDivisor);
+    
+    quotientNumber = 0
+    tempNumber = 0
+    
+    # Go from 31 to 0 and accumulate all valid bits
  
-    # Code to swap 'a' and 'b'
-    a = a ^ b 
-    b = a ^ b
-    a = a ^ b 
-    print ("After Swapping: a = ", a, " b =", b)
+    for i in range(31, -1, -1):
  
-def swap2(a, b):
+        if (tempNumber + (ourDivisor << i) <= ourDividend):
+            tempNumber += ourDivisor << i
+            quotientNumber |= 1 << i
  
-    a = (a & b) + (a | b)
-    b = a + (~b) + 1
-    a = a + (~b) + 1
-    print ("After Swapping: a = ", a, " b =", b)
+    # Assuming the sign value computed earlier is -1, negate the quotient value
+    if sign ==-1 :
+        quotientNumber=-quotientNumber
+    return quotientNumber
  
-swap1(1,2)
-swap2(1,2)
+ 
+a = int(input("Enter a for a/b : "))
+b = int(input("Enter b for a/b : "))
+print("Result of ",a,"/",b,"is",divide(a, b))
