@@ -1,36 +1,17 @@
-# Program to showcase working of different types of bitwise operators
+# Program to check if the user entered number is odd or even using only bitwise operator
  
-num1 = 10
-num2 = 4
- 
-# Using AND operator
-print("num1 & num2 =", num1 & num2)
- 
-# Using OR operator
-print("\nnum1 | num2 =", num1 | num2)
- 
-# Using NOT operator
-print("\n~num1 =", ~num1)
- 
-# Using XOR operator
-print("\nnum1 ^ num2 =", num1 ^ num2)
+# Returns true if n is even, else odd
+def isEvenOdd( n) :
+    # XOR with 1 equals n+1
+    if (n ^ 1 == n + 1) :
+        return True;
+    else :
+        return False;
  
  
+number = int(input("Enter your number : "))
  
-num1 = 10
-num2 = 4
- 
-# Using Right Shift operator on num1
-print("\nnum1 >> 1 =", num1 >> 1)
- 
-# Using Right Shift operator on num2
-print("\nnum2 >> 1 =", num2 >> 1)
- 
-num1 = 10
-num2 = 4
- 
-# Using Left Shift  operator on num1
-print("\nnum1 << 1 =", num1 << 1)
- 
-# Using Left Shift operator on num2
-print("\nnum2 << 1 =", num2 << 1)
+if isEvenOdd(number):
+    print(number," is Even")
+else:
+    print(number," is Odd")
