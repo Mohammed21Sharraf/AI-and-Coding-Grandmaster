@@ -1,26 +1,24 @@
-# Program to check if a number is power of 4
+# Program to computer x^y without using math function
  
-def powerOf4(number):
-     
-    count = 0
-     
-    # If only 1 set bit exists
-    if (number & (~(number & (number - 1)))):
-         
-        # Count 0 bits before set bit
-        while(number > 1):
-            number >>= 1
-            count += 1
-         
-        # If count is even return true else false
-        if(count % 2 == 0):
-            return True
+ 
+def computePower( x, y):
+ 
+    # Default total is 1
+    result = 1
+ 
+    while (y > 0):
+        # If y is even 
+        if (y % 2 == 0):
+            x = x * x
+            y>>=1
+        
         else:
-            return False
+            result = result * x
+            y = y - 1
+        
+    return result
  
  
-number = int(input("Enter your number : "))
-if(powerOf4(number)):
-    print(number, 'is a power of 4')
-else:
-    print(number, 'is not a power of 4')
+x = int(input("Enter x for x^y : "))
+y = int(input("Enter y for x^y : "))
+print("Total : ",(computePower(x, y)))
