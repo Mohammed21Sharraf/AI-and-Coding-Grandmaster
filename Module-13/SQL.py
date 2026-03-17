@@ -1,49 +1,31 @@
 # Import Dataset
 from google.colab import files
-uploaded = files.upload()
+uplaoded = files.upload()
 
-# Import Necessary Libraries
-import numpy as np
+# Import necessary libraries
 import pandas as pd
+import numpy as np
+from datetime import datetime
+
+# Setup a connection with database
+# and print all the tables inside it
 import sqlite3
 
-# Setup connection with database 
-# And display all tables inside the database
 database = 'database.sqlite'
 
 conn = sqlite3.connect(database)
 
-tables = pd.read_sql("""SELECT *
-                        FROM sqlite_master
-                        WHERE type='table'""", conn)
-
+tables = pd.read_sql("""SELECT * 
+                    FROM sqlite_master
+                    WHERE type='table';""", conn)
 tables
 
-# Check how Inner join works
-joined_city = pd.read_sql("""SELECT c.Country_Id, c.Country_Name, ci.City_Name
-                            FROM country c
-                            INNER JOIN city ci
-                            ON c.Country_Id == ci.Country_id""", conn)
-joined_city
+# Aliasing 
+match_details = pd.read_sql('''SELECT Season_Id, Match_Id,  
+                              v.Venue_Name, c.City_Name, t.Team_Name AS Winner 
+                              FROM Match
+                              INNER JOIN Venue AS v ON match.Venue_Id == v.Venue_Id
+                              INNER JOIN City AS c ON v.City_Id == c.City_Id
+                              INNER JOIN Team AS t ON match.Match_Winner == t.Team_Id;''', conn)
 
-# Check how Outer join works
-joined_left = pd.read_sql("""SELECT *
-                            FROM player
-                            LEFT JOIN season
-                            ON player.Player_Id == season.Man_of_the_Series""", conn)
-joined_left
-
-# Check how Cross join works
-joined_cross = pd.read_sql("""SELECT c.Country_Id, c.Country_Name, ci.City_Name
-                            FROM country c
-                            CROSS JOIN city ci""", conn)
-joined_cross
-
-# Check how Union Clause works
-union = pd.read_sql("""SELECT Player_Name 
-                      FROM player
-                      UNION
-                      SELECT Team_Name
-                      FROM team""", conn)
-
-union
+match_details
