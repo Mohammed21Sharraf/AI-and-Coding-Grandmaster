@@ -1,51 +1,48 @@
-# Import dataset
+#Import Dataset
 from google.colab import files
-file = files.upload()
+uploaded = files.upload()
 
 # Connect with sqlite database
 # Import necessary libraries
+import pandas as pd
+import numpy as np
+
 import sqlite3
 
-conn = sqlite3.connect('database.sqlite')
+database = 'database.sqlite'
 
-print("Opened database successfully")
+conn = sqlite3.connect(database)
+print('Opened data successfully')
 
-# Create a new table in given database with mentioned constraints
-conn.execute('''CREATE TABLE CLASS_10
-         (SNO INT PRIMARY KEY NOT NULL,
-         Roll_No INT NOT NULL,
-         Name TEXT NOT NULL,
-         AGE INT DEFAULT (15),
-         GENDER TEXT NOT NULL,
-         Email_ID TEXT NOT NULL,
-         Contact_No REAL NOT NULL);''')
-
-print("Table created successfully")
-
-# Enter data for 3 different entries
-conn.execute("INSERT INTO CLASS_10 (SNO,Roll_No,NAME,AGE,Gender,Email_ID,Contact_No) \
-      VALUES (1, 1, 'Allen', 14, 'Male', 'allen@gmail.com', 8080900 )");
-
-conn.execute("INSERT INTO CLASS_10 (SNO,Roll_No,NAME,AGE,Gender,Email_ID,Contact_No) \
-      VALUES (2, 2, 'Aisha', 14, 'Female', 'aish@gmail.com', 9080900 )");
-
-conn.execute("INSERT INTO CLASS_10 (SNO,Roll_No,NAME,AGE,Gender,Email_ID,Contact_No) \
-      VALUES (3, 3, 'Jeff', 15, 'Male', 'allen@gmail.com', 9900900 )");
-
-# Save the changes
-conn.commit()
-print("Records created successfully")
-
-# Display all the tables of this database
-import pandas as pd
-tables = pd.read_sql("""SELECT * 
+# Display all the tables of the database
+df = pd.read_sql("""SELECT * 
                     FROM sqlite_master
                     WHERE type='table';""", conn)
-tables
+df
 
-# Read Table from the database into dataframe
-class_10d = pd.read_sql("""SELECT *
-                        FROM CLASS_10;""", conn)
+# Display the first five rows of the Player_Match table
+player_match = pd.read_sql("""SELECT *
+                        FROM Player_Match""", conn)
 
-class_10d.head()
+player_match.head()
+
+# Check the presence of null values in the Player_Match table
+null_player_match = pd.read_sql("""SELECT *
+                        FROM Player_Match
+                        WHERE Team_Id IS NULL""", conn)
+
+null_player_match
+
+# Display the first five rows of the Match table
+toss_dec = pd.read_sql("""SELECT *
+                        FROM Match""", conn)
+
+toss_dec.head()
+
+# Check the presence of null values in the Match table
+null_match = pd.read_sql("""SELECT *
+                        FROM Match
+                        WHERE MATCH_Winner IS NULL""", conn)
+
+null_match
 
