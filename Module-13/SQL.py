@@ -1,9 +1,7 @@
-# 1. Import dataset
+# Import dataset
 from google.colab import files
 file = files.upload()
 
-
-"""#### **2. Connect with SQLite Database**"""
 
 # Connect with sqlite database
 # Import necessary libraries
@@ -21,14 +19,11 @@ tables = pd.read_sql("""SELECT *
                     WHERE type='table';""", conn)
 tables
 
-# Check team id of all teams
-teams = pd.read_sql("""SELECT *
-                        FROM Team;""", conn)
-teams
-
 # Read Table from the database into dataframe
 matches = pd.read_sql("""SELECT *
                         FROM Match;""", conn)
+
+matches.head()
 
 """**Conclusion -**
 
@@ -36,26 +31,28 @@ matches = pd.read_sql("""SELECT *
 - 3 columns with null values
 """
 
-matches
-
-# Check details of all the matches won by Mumbai Indians
-MI_wins = pd.read_sql("""SELECT *
+# Get the Average Win Margin of all the winning teams for Season 9
+result1 = pd.read_sql("""SELECT AVG(Win_Margin), Match_Winner
                         FROM Match
-                        WHERE Match_Winner == 7;""", conn)
-MI_wins
+                        WHERE Season_Id == 9
+                        GROUP BY Match_Winner
+                        ORDER BY AVG(Win_Margin);""", conn)
+result1
 
-# Check details of all the matches won by Mumbai Indians in last two seasons
-MI_S8_S9 = pd.read_sql("""SELECT *
+# Get the count of the venues for Season 9
+result2 = pd.read_sql("""SELECT COUNT(DISTINCT Venue_Id)
                         FROM Match
-                        WHERE Match_Winner == 7 and Season_Id IN (8,9);""", conn)
-MI_S8_S9
+                        WHERE Season_Id == 9;""", conn)
+result2
 
-new_teams = pd.read_sql("""SELECT *
-                        FROM Team
-                        WHERE Team_Name LIKE 'De%';""", conn)
-new_teams
-
-# Check the minimum and maximum win_margin of all the matches 
-min_max_margin = pd.read_sql("""SELECT MIN(Win_Margin), MAX(Win_Margin)
+# Get the Minimum, Maximum and Average Win Margin
+# Also get the total number of players who have received man of the match throughout all the seasons
+result3 = pd.read_sql("""SELECT MIN(Win_Margin), Max(Win_Margin), Avg(Win_Margin), COUNT(DISTINCT(Man_of_the_Match))
                         FROM Match;""", conn)
-min_max_margin
+result3
+
+# Return total of win_margins for all the winners in season 9
+result4 = pd.read_sql("""SELECT SUM(Win_Margin)
+                        FROM Match
+                        WHERE Season_Id == 9;""", conn)
+result4
