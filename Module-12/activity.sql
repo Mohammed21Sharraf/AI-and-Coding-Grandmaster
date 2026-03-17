@@ -1,27 +1,29 @@
-CREATE TABLE IF NOT EXISTS PRODUCT(
-    PRO_ID TEXT PRIMARY KEY,
-    PRO_NAME TEXT,
-    PRO_PRICE TEXT,
-    PRO_COM TEXT
+-- Create the PRODUCTS table if it does not exist
+CREATE TABLE IF NOT EXISTS PRODUCTS (
+    PRODUCT_ID TEXT,
+    PRODUCT_NAME TEXT,
+    SUPPLIER_ID TEXT,
+    CATEGORY_ID TEXT,
+    UNIT_TEXT,
+    PRICE_REAL
 );
 
-INSERT INTO PRODUCT(PRO_ID,PRO_NAME,PRO_PRICE,PRO_COM)
-VALUES
-    ("101","MOTHER BOARD","3200","15"),
-    ("102","KEY BOARD","450","16"),
-    ("103","ZIP DRIVE","250","14"),
-    ("104","SPEAKER","550","16"),
-    ("105","MONITOR","5000","11"),
-    ("106","DVD DRIVE","900","12"),
-    ("107","CD DRIVE","800","12"),
-    ("108","PRINTER","2600","13"),
-    ("109","REFILL CARTRIDGE","350","13"),
-    ("110","MOUSE","250","12");
-SELECT pro_name, pro_price
-    FROM PRODUCT
-    WHERE pro_price =
-    (SELECT MIN(pro_price) FROM PRODUCT);
-SELECT pro_name, pro_price
-    FROM PRODUCT
-    WHERE pro_price =
-    (SELECT MAX(pro_price) FROM PRODUCT);
+-- Insert sample data into the PRODUCTS table
+INSERT INTO PRODUCTS (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, UNIT_TEXT, PRICE_REAL) VALUES
+('1', 'CHAIS', '1', '1', '10 BOXES*20 BAGS', 18),
+('2', 'CHANG', '1', '1', '24-12 OZ BOTTLES', 19),
+('3', 'ANISEED SYRUP', '1', '2', '12-550 ML BOTTLES', 10),
+('4', 'CHEF ANTON SEASONING', '2', '2', '48-6 OZ JARS', 22),
+('5', 'CHEF ANTON MIX', '2', '2', '36 BOXES', 21.35);
+
+-- Query to count the number of products
+SELECT COUNT(PRODUCT_ID) AS Product_Count
+FROM PRODUCTS;
+
+-- Query to find the average price of products
+SELECT AVG(PRICE) AS Average_Price
+FROM PRODUCTS;
+
+-- Query to find the total price of products
+SELECT SUM(PRICE) AS Total_Price
+FROM PRODUCTS;
