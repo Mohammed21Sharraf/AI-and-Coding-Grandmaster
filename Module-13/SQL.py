@@ -2,17 +2,41 @@
 from google.colab import files
 file = files.upload()
 
-
 # Connect with sqlite database
 # Import necessary libraries
 import sqlite3
 
-database = 'database.sqlite'
+conn = sqlite3.connect('database.sqlite')
 
-conn = sqlite3.connect(database)
-print('Opened data successfully')
+print("Opened database successfully")
 
-# Read SQL query for getting all the tables of database into a dataframe
+# Create a new table in given database with mentioned constraints
+conn.execute('''CREATE TABLE CLASS_10
+         (SNO INT PRIMARY KEY NOT NULL,
+         Roll_No INT NOT NULL,
+         Name TEXT NOT NULL,
+         AGE INT DEFAULT (15),
+         GENDER TEXT NOT NULL,
+         Email_ID TEXT NOT NULL,
+         Contact_No REAL NOT NULL);''')
+
+print("Table created successfully")
+
+# Enter data for 3 different entries
+conn.execute("INSERT INTO CLASS_10 (SNO,Roll_No,NAME,AGE,Gender,Email_ID,Contact_No) \
+      VALUES (1, 1, 'Allen', 14, 'Male', 'allen@gmail.com', 8080900 )");
+
+conn.execute("INSERT INTO CLASS_10 (SNO,Roll_No,NAME,AGE,Gender,Email_ID,Contact_No) \
+      VALUES (2, 2, 'Aisha', 14, 'Female', 'aish@gmail.com', 9080900 )");
+
+conn.execute("INSERT INTO CLASS_10 (SNO,Roll_No,NAME,AGE,Gender,Email_ID,Contact_No) \
+      VALUES (3, 3, 'Jeff', 15, 'Male', 'allen@gmail.com', 9900900 )");
+
+# Save the changes
+conn.commit()
+print("Records created successfully")
+
+# Display all the tables of this database
 import pandas as pd
 tables = pd.read_sql("""SELECT * 
                     FROM sqlite_master
@@ -20,39 +44,8 @@ tables = pd.read_sql("""SELECT *
 tables
 
 # Read Table from the database into dataframe
-matches = pd.read_sql("""SELECT *
-                        FROM Match;""", conn)
+class_10d = pd.read_sql("""SELECT *
+                        FROM CLASS_10;""", conn)
 
-matches.head()
+class_10d.head()
 
-"""**Conclusion -**
-
-- 12 Numeric features (Integer and Numeric) and 1 categorical feature (Text)
-- 3 columns with null values
-"""
-
-# Get the Average Win Margin of all the winning teams for Season 9
-result1 = pd.read_sql("""SELECT AVG(Win_Margin), Match_Winner
-                        FROM Match
-                        WHERE Season_Id == 9
-                        GROUP BY Match_Winner
-                        ORDER BY AVG(Win_Margin);""", conn)
-result1
-
-# Get the count of the venues for Season 9
-result2 = pd.read_sql("""SELECT COUNT(DISTINCT Venue_Id)
-                        FROM Match
-                        WHERE Season_Id == 9;""", conn)
-result2
-
-# Get the Minimum, Maximum and Average Win Margin
-# Also get the total number of players who have received man of the match throughout all the seasons
-result3 = pd.read_sql("""SELECT MIN(Win_Margin), Max(Win_Margin), Avg(Win_Margin), COUNT(DISTINCT(Man_of_the_Match))
-                        FROM Match;""", conn)
-result3
-
-# Return total of win_margins for all the winners in season 9
-result4 = pd.read_sql("""SELECT SUM(Win_Margin)
-                        FROM Match
-                        WHERE Season_Id == 9;""", conn)
-result4
