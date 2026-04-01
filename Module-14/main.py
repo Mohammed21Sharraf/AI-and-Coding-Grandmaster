@@ -1,10 +1,12 @@
-
+import pandas as pd
 import numpy as np
-data_type = [('name', 'S15'), ('class', int), ('height', float)]
-students_details = [('James', 5, 48.5), ('Nail', 6, 52.5),('Paul', 5, 42.10), ('Pit', 5, 40.11)]
-# create a structured array
-students = np.array(students_details, dtype=data_type)   
-print("Original array:")
-print(students)
-print("Sort by height")
-print(np.sort(students, order='height'))
+
+exam_data  = {'name': ['Anastasia', 'Dima', 'Katherine', 'James', 'Emily', 'Michael', 'Matthew', 'Laura', 'Kevin', 'Jonas'],
+        'score': [12.5, 9, 16.5, np.nan, 9, 20, 14.5, np.nan, 8, 19],
+        'attempts': [1, 3, 2, 3, 2, 3, 1, 1, 2, 1],
+        'qualify': ['yes', 'no', 'yes', 'no', 'no', 'yes', 'yes', 'no', 'no', 'yes']}
+labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+
+df = pd.DataFrame(exam_data , index=labels)
+print("Summary of the basic information about this DataFrame and its data:")
+print(df.info())
