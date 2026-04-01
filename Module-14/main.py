@@ -1,29 +1,66 @@
-# Importing necessary libraries
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import seaborn as sns
+import matplotlib.pyplot as plt
 
-# Loading the dataset
-df = pd.read_csv("USA_Housing.csv")
+# Set style
+sns.set(style="ticks")
 
-# Displaying the first 10 rows
-print(df.head(10))
+# Load dataset
+weather = pd.read_csv('Test.csv')
 
-# Getting dataset information
-print(df.info())
+# Display first few rows
+print(weather.head())
 
-# Getting statistical summary
-print(df.describe())
+# Get dataset information
+print(weather.info())
 
-# Displaying column names
-print(df.columns)
+# Create barplot
+sns.barplot(x=weather['humidity'], y=weather['temperature'])
 
-# Creating pairplot
-sns.pairplot(df.select_dtypes(include=[np.number]))
+# Create distribution plot
+sns.distplot(weather['humidity'])
+plt.show()
 
-# Creating correlation heatmap
-sns.heatmap(df.select_dtypes(include=[np.number]).corr(), annot=True)
+# Create distribution plot without KDE and with rug
+sns.distplot(weather['humidity'], kde=False, rug=True)
+plt.show()
 
-# Displaying the plots
+# Create joint plot
+sns.jointplot(x=weather['humidity'], y=weather['temperature'])
+plt.show()
+
+# Create hex joint plot
+sns.jointplot(x=weather['humidity'], y=weather['temperature'], kind="hex")
+plt.show()
+
+# Create KDE joint plot
+sns.jointplot(x=weather['humidity'], y=weather['temperature'], kind="kde")
+plt.show()
+
+# Create pairplot for selected columns
+sns.pairplot(weather[['humidity', 'temperature', 'air_pollution_index']])
+plt.show()
+
+# Create stripplot
+sns.stripplot(x=weather['weather_type'], y=weather['temperature'])
+plt.show()
+
+# Create stripplot with jitter
+sns.stripplot(x=weather['weather_type'], y=weather['temperature'], jitter=True)
+plt.show()
+
+# Create swarmplot
+sns.swarmplot(x=weather['humidity'], y=weather['temperature'])
+plt.show()
+
+# Create barplot with hue
+sns.barplot(x=weather['humidity'], y=weather['temperature'], hue=weather['weather_type'])
+plt.show()
+
+# Create countplot
+sns.countplot(x=weather['weather_type'])
+plt.show()
+
+# Create pointplot with hue
+sns.pointplot(x=weather['humidity'], y=weather['temperature'], hue=weather['weather_type'])
 plt.show()
