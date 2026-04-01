@@ -1,36 +1,13 @@
-# Import libraries
-import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
-
-# Read data from CSV file
-df = pd.read_csv("country_vaccinations.csv")
-
-# Display first 10 rows
-df.head(10)
-
-# Check for any null values in each column
-df.isnull().any()
-
-# Visualize missing values using a heatmap (optimize by using a subset of data)
-subset = df.iloc[:5200, :]  # Taking the first 100 rows for better performance
-plt.figure(figsize=(12, 8))
-sns.heatmap(subset.isnull(), cbar=False, cmap="viridis")
+x=[0,5,10,15,20,25,30]
+y1=[10,15,20,20,30,15,0]
+y2=[10,12,15,12,20,10,0]
+plt.plot(x,y1,linestyle='dashed',marker='D')
+plt.plot(x,y2,linestyle='dashed',marker='D')
+plt.title('velocity-Time Graph')
+plt.xlabel('Velocity m/s')
+plt.ylabel('Time(s)')
+plt.xlim(5,25)
+plt.ylim(5,25)
+plt.legend()
 plt.show()
-
-# Display first 10 rows
-df.head(10)
-
-# Drop rows where all values are NaN
-df.dropna(how="all")
-
-# Fill missing values using backward fill method
-df.fillna(method="bfill")
-
-# Interpolate missing values
-df.interpolate()
-
-# Drop all rows with any NaN values
-df_dropped = df.dropna()
-df_dropped
