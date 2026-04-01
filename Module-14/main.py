@@ -1,31 +1,29 @@
+# Importing necessary libraries
+import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
-students_names=["sanjay","Rahul","Karan","Wasim","Ramesh","Ajay","Sartaj","Priya"]
-students_marks=[35,50,20,45,25,40,25,40]
+# Loading the dataset
+df = pd.read_csv("USA_Housing.csv")
 
-marks_perc = []
-for x in students_marks:
-	res = (x/50)*100
-	marks_perc.append(res)
+# Displaying the first 10 rows
+print(df.head(10))
 
-print(marks_perc)
+# Getting dataset information
+print(df.info())
 
-# line chart
-def marks_line_chart():
-  plt.plot(students_names,students_marks)
-  plt.title("Students Marks Graph")
-  plt.xlabel("Students Names")
-  plt.ylabel("Students Marks")
-  plt.show()
+# Getting statistical summary
+print(df.describe())
 
-marks_line_chart()
+# Displaying column names
+print(df.columns)
 
-# bar chart 
-def percentage_bar_chart():
-  plt.bar(students_names,marks_perc)
-  plt.title("Students' Percentage Graph")
-  plt.xlabel("Student Names")
-  plt.ylabel("Student Percentage")
-  plt.show()
+# Creating pairplot
+sns.pairplot(df.select_dtypes(include=[np.number]))
 
-percentage_bar_chart()
+# Creating correlation heatmap
+sns.heatmap(df.select_dtypes(include=[np.number]).corr(), annot=True)
+
+# Displaying the plots
+plt.show()
