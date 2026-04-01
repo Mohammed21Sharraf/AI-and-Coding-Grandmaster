@@ -1,66 +1,77 @@
+import numpy as np
 import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
+import seaborn as sns
 
-# Set style
-sns.set(style="ticks")
+# Get seaborn dataset names
+print(sns.get_dataset_names())
 
-# Load dataset
-weather = pd.read_csv('Test.csv')
+# Load penguins dataset
+df = sns.load_dataset('penguins')
 
-# Display first few rows
-print(weather.head())
+# Display first 10 rows
+print(df.head(10))
 
-# Get dataset information
-print(weather.info())
+# Display shape
+print(df.shape)
 
-# Create barplot
-sns.barplot(x=weather['humidity'], y=weather['temperature'])
+# Display last few rows
+print(df.tail())
 
-# Create distribution plot
-sns.distplot(weather['humidity'])
+# Check for null values
+print(df.isnull().sum())
+
+# Display basic statistics
+print(df.describe())
+
+# Display data types
+print(df.dtypes)
+
+# Display dataset info
+print(df.info())
+
+# Display all statistics including categorical
+print(df.describe(include='all'))
+
+# Display correlation matrix
+print(df.corr(numeric_only=True))
+
+# Create heatmap of correlations
+sns.heatmap(df.corr(numeric_only=True), annot=True)
 plt.show()
 
-# Create distribution plot without KDE and with rug
-sns.distplot(weather['humidity'], kde=False, rug=True)
+# Create histograms
+df.select_dtypes(include=[np.number]).hist(figsize=(12,8))
 plt.show()
 
-# Create joint plot
-sns.jointplot(x=weather['humidity'], y=weather['temperature'])
+# Create box plots
+df.select_dtypes(include=[np.number]).plot(kind='box', subplots=True, layout=(3,2), sharex=False, sharey=False, figsize=(8,12))
 plt.show()
 
-# Create hex joint plot
-sns.jointplot(x=weather['humidity'], y=weather['temperature'], kind="hex")
+# Display value counts
+print(df.sex.value_counts())
+print(df.island.value_counts())
+print(df.species.value_counts())
+
+# Create count plots
+sns.countplot(data=df, x='sex')
 plt.show()
 
-# Create KDE joint plot
-sns.jointplot(x=weather['humidity'], y=weather['temperature'], kind="kde")
+sns.countplot(data=df, x='island')
 plt.show()
 
-# Create pairplot for selected columns
-sns.pairplot(weather[['humidity', 'temperature', 'air_pollution_index']])
+sns.countplot(data=df, x='species')
 plt.show()
 
-# Create stripplot
-sns.stripplot(x=weather['weather_type'], y=weather['temperature'])
+sns.countplot(data=df, x='sex', hue='species')
 plt.show()
 
-# Create stripplot with jitter
-sns.stripplot(x=weather['weather_type'], y=weather['temperature'], jitter=True)
+sns.countplot(data=df, x='island', hue='species')
 plt.show()
 
-# Create swarmplot
-sns.swarmplot(x=weather['humidity'], y=weather['temperature'])
+sns.countplot(data=df, x='island', hue='sex')
 plt.show()
 
-# Create barplot with hue
-sns.barplot(x=weather['humidity'], y=weather['temperature'], hue=weather['weather_type'])
-plt.show()
-
-# Create countplot
-sns.countplot(x=weather['weather_type'])
-plt.show()
-
-# Create pointplot with hue
-sns.pointplot(x=weather['humidity'], y=weather['temperature'], hue=weather['weather_type'])
+# Create pairplot
+sns.pairplot(data=df, hue="species")
 plt.show()
