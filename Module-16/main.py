@@ -15,17 +15,37 @@ data.head(5)
 
 """####**Check Null Values**"""
 
-data.isnull().sum()
+data.dtypes
 
-"""**Null values present in Cabin -**
+"""#### **Nominal and Ordinal Categorical Features -**
 
-#### **Boxplot of Feature Age and Pclass**
+
 """
 
-plt.boxplot(data['Age'])
-plt.title('Age distribution')
-plt.show()
+# Nominal Categorical Variables
+nominal_cat = ['Name','Ticket','Cabin']
 
-plt.boxplot(data['Pclass'])
-plt.title('Passenger Class distribution')
-plt.show()
+# Ordinal Categorical Variables
+ordinal_cat = ['Embarked','Gender']
+
+"""#### **Median value of feature Gender and Embarked**"""
+
+data['Gender'].value_counts()
+
+gender_categories = ['Female','Male']
+
+data['Gender'] = pd.Categorical(data['Gender'], gender_categories, ordered=True)
+
+median_index = np.median(data['Gender'].cat.codes)
+median_gender = gender_categories[int(median_index)]
+print(median_gender)
+
+data['Embarked'].value_counts()
+
+embarked_categories = ['S','C','Q']
+
+data['Embarked'] = pd.Categorical(data['Embarked'], embarked_categories, ordered=True)
+
+median_index = np.median(data['Embarked'].cat.codes)
+median_embarked = embarked_categories[int(median_index)]
+print(median_embarked)
