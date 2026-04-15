@@ -13,26 +13,58 @@ data = pd.read_csv('Titanic Dataset.csv')
 
 data.head(5)
 
-"""#### **Create new dataset with only Numerical Features**"""
+"""#### **Minimum and Maximum Values of Age**"""
 
-num_data = data.drop(['Name', 'Ticket', 'Cabin', 'Embarked', 'Gender'], axis=1)
+minimum_age = data['Age'].min()
+print('Minimum Age :', minimum_age)
 
-labels = ['PassengerId','Survived','Pclass','Age','SibSp','Parch','Fare']
+maximum_age = data['Age'].max()
+print('Maximum Age :', maximum_age)
 
-"""#### **Creating boxplot for all the features**"""
+"""#### **Creating binned age and giving it a label**"""
 
-for label in labels:
-  plt.boxplot(num_data[label])
-  print('Distribution of', label)
-  plt.show()
+bins = [0, 15, 30, 45, 60, 75]
 
-"""**Conclusion -**
+data['binned_age'] = pd.cut(data['Age'], bins)
 
-- since there are outliers present in many features, so we should standardize the features
+print(data[['binned_age', 'Age']].head())
 
-#### **Scaling Dataset**
+age_labels = ['Young', 'Young - Adult', 'Middle Aged', 'Middle-Older Age', 'Senior']
+ 
+# Bin the values of the 'Age' column and specify the labels 
+data['binned_age'] = pd.cut(data['Age'], bins, labels = age_labels)
+
+"""#### **Barplot for binned age**"""
+
+data['binned_age'].value_counts().plot(kind='bar')
+ 
+# Label the bar graph
+plt.title('Dance Class Age Distribution')
+plt.xlabel('Ages')
+plt.ylabel('Count')
+
+"""**Conclusion**
+ 
+- Features Gender and Embarked have only 2 and 3 categories respectively
+- Other categorcial features have too many categories to even collapse
+
+#### **Check distribution and skewness of all the features**
 """
 
-from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
-num_data = scaler.fit_transform(num_data)
+labels = ['PassengerId','Survived','Pclass','Age','SibSp','Parch','Fare']
+for label in labels:
+  print('Distribution of', label)
+  sns.distplot(data[label])
+  plt.show()
+  print('Skewness -', data[label].skew())
+
+"""**Conclusion**
+
+- Features - SibSp, Parch and Fare are skewed
+
+#### **Log Transform Skewed Features**
+"""
+
+data['log_SibSp'] = np.log(data['SibSp'])
+data['log_Parch'] = np.log(data['Parch'])
+data['log_Fare'] = np.log(data['Fare'])
