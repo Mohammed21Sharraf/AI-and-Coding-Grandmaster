@@ -1,17 +1,11 @@
-RS = int(input("Enter number of red shirts: "))
-BS = int(input("Enter number of blue shirts: "))
-WS = int(input("Enter number of white shirts: "))
+prob_st = 0.2
 
-total = RS+BS+WS
+prob_st_pos = 0.2*0.85
+prob_nst_pos = 0.8*0.02
+prob_positive = prob_st_pos + prob_nst_pos 
 
-prob_a = BS/total
-prob_b = RS/total
+prob_pos_given_st = 0.85
 
-prob_bga = prob_b
-prob_a_and_b = prob_a*prob_b
+prob_result = (prob_st*prob_pos_given_st)/prob_positive
 
-print("Probability that the second shirt is red given that the first shirt is blue: ")
-print(round((prob_bga),3))
-
-print("Probability that the second shirt is red and the first shirt is blue: ")
-print(round((prob_a_and_b),3))
+print("Probability of person testing positive having step throat is :", round((prob_result),3))
