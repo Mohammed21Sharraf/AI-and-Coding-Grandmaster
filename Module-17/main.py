@@ -1,9 +1,15 @@
 import scipy.stats as stats
 
-# expected value = 10, probability of observing 6
-prob1 = stats.poisson.pmf(6, 10)
-print("probability of raining for exactly 6 days :", prob1)
+## Checkpoint 1
+# calculate prob_more_than_20
+prob1 = 1-stats.poisson.cdf(20, 15)
 
-# expected value = 10, probability of observing 12-14
-prob2 = stats.poisson.pmf(12, 10) + stats.poisson.pmf(13, 10) + stats.poisson.pmf(14, 10)
-print("probability of raining for 12-14 days :", prob2)
+# print prob_more_than_20
+print(prob1)
+
+## Checkpoint 2
+# calculate prob_17_to_21
+prob2 = stats.poisson.cdf(21, 15) - stats.poisson.cdf(16, 15)
+
+# print prob_17_to_21
+print(prob2)
