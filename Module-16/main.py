@@ -1,5 +1,6 @@
 ####**Import Libraries**
 
+
 # Import Libraries
 import pandas as pd
 import numpy as np
@@ -7,45 +8,40 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 """####**Import Dataset**"""
-
 # Import dataset
 data = pd.read_csv('Titanic Dataset.csv')
 
 data.head(5)
 
-"""####**Check Null Values**"""
+"""#### **Set Plot Style**"""
 
-data.dtypes
+sns.set_style('whitegrid')
 
-"""#### **Nominal and Ordinal Categorical Features -**
+"""#### **Countplot for feature 'Survived'**"""
 
+sns.countplot(x='Survived', data=data)
+
+"""#### **Barchart for showing passengers belonging to different gender who survived or not**
 
 """
 
-# Nominal Categorical Variables
-nominal_cat = ['Name','Ticket','Cabin']
+sns.countplot(x='Gender', hue='Survived', data=data)
 
-# Ordinal Categorical Variables
-ordinal_cat = ['Embarked','Gender']
+"""#### **Customize Plots**"""
 
-"""#### **Median value of feature Gender and Embarked**"""
+sns.countplot(x='Survived', data=data, palette='winter')
 
-data['Gender'].value_counts()
+sns.countplot(x='Gender', hue='Survived', data=data, palette='winter')
 
-gender_categories = ['Female','Male']
+"""#### **Countplot for Embarked**"""
 
-data['Gender'] = pd.Categorical(data['Gender'], gender_categories, ordered=True)
+sns.countplot(x='Embarked', data=data)
 
-median_index = np.median(data['Gender'].cat.codes)
-median_gender = gender_categories[int(median_index)]
-print(median_gender)
+"""#### **Rotate the value labels and modify their font size**
 
-data['Embarked'].value_counts()
+"""
 
-embarked_categories = ['S','C','Q']
+sns.countplot(x='Embarked', data=data)
+plt.xticks(rotation=30, fontsize=20)
+plt.show()
 
-data['Embarked'] = pd.Categorical(data['Embarked'], embarked_categories, ordered=True)
-
-median_index = np.median(data['Embarked'].cat.codes)
-median_embarked = embarked_categories[int(median_index)]
-print(median_embarked)
