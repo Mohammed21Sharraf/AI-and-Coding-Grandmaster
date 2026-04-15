@@ -3,36 +3,40 @@
 # Import Libraries
 import pandas as pd
 import numpy as np
-import statistics as stats
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 """####**Import Dataset**"""
 
-from google.colab import files
-uploaded = files.upload()
+# Import dataset
+data = pd.read_csv('Weather Dataset.csv')
 
-data = pd.read_csv('Titanic Dataset.csv')
+data.head(5)
 
-data.head()
+data.info()
 
-"""####**Median Value of Age and Fare**"""
+"""####**Check Null Values**"""
 
-median_age = np.median(data['Age'])
-print("Median value of Age -", median_age)
+data.isnull().sum()
 
-median_fare = np.median(data['Fare'])
-print("Median value of Fare -", median_fare)
+"""**No feature has any null values**
 
-"""####**Mode Value of Age and PClass**"""
+#### **Mean, Variance and Standard Deviation of Temperature (C)**
+"""
 
-mode_age = stats.mode(data['Age'])
-print("Mode value of Age -", mode_age)
+mean_temp = np.mean(data['Temperature (C)'])
+print("Mean Temperature is :", mean_temp)
 
-mode_class = stats.mode(data['Pclass'])
-print("Mode value of PClass -", mode_class)
+var_temp = np.var(data['Temperature (C)'])
+print("Variation of Temperature is :", var_temp)
 
-"""####**Mode Value of Categorical Feature - Gender**"""
+standard_deviation_temp = np.std(data['Temperature (C)'])
+print("Standard Deviation of Temperature is :", standard_deviation_temp)
 
-mode_gender = data['Gender'].value_counts().index[0]
-print("Mode of Feature Gender -", mode_gender)
+"""#### **Mean, Variance and Standard Deviation of Temperature (C) for every month**"""
+
+for i in range(1, 13):
+  month = data.loc[data["month"] == i]["Temperature (C)"]
+  print("For month "+str(i))
+  print("Mean temperature is "+ str(np.mean(month)))
+  print("Standard deviation is "+ str(np.std(month))+"\n")
