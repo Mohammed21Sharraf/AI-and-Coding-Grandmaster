@@ -1,23 +1,17 @@
-def prob_a_and_b(a, b, total):
-	# probability of event a
-	prob_a = orange/total
+RS = int(input("Enter number of red shirts: "))
+BS = int(input("Enter number of blue shirts: "))
+WS = int(input("Enter number of white shirts: "))
 
-	# probability of event b
-	prob_bga = blue/(total-1)
+total = RS+BS+WS
 
-	# probability of intersection of events a and b
-	prob_AandB = prob_a * prob_bga
+prob_a = BS/total
+prob_b = RS/total
 
-	# add return statement here
-	return round(prob_AandB,3)
-  
+prob_bga = prob_b
+prob_a_and_b = prob_a*prob_b
 
-# taking input for total number of orange and blue balls
-orange = int(input("Enter number of orange balls "))
-blue = int(input("Enter number of blue balls "))
-total = orange+blue
+print("Probability that the second shirt is red given that the first shirt is blue: ")
+print(round((prob_bga),3))
 
-
-# call function for final result
-print('Probability of Getting 1st orange and 2nd blue ball: ')
-print(prob_a_and_b(orange, blue, total))
+print("Probability that the second shirt is red and the first shirt is blue: ")
+print(round((prob_a_and_b),3))
