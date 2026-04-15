@@ -1,12 +1,18 @@
-import numpy as np
+import scipy.stats as stats
 
-# create 6 sided "die"
-die_sides = int(input("enter number of sides for dice (6/12) : "))
-die = range(1, die_sides)
+# value of interest
+# change this
+x = 3
 
-# set number of rolls
-num_rolls = int(input("Enter number of times you want to roll the dice : "))
+# sample size
+# change this
+n = 10
 
-# roll the "die" the set amount of times
-results = np.random.choice(die, size = num_rolls, replace = True)
-print(results)
+# calculate probability
+prob_1 = stats.binom.pmf(x, n, 0.5)
+print("Probability of getting 3 heads")
+print(prob_1)
+
+prob_2 = 1-stats.binom.pmf(0, n=10, p=.5)-stats.binom.pmf(1, n=10, p=.5)-stats.binom.pmf(2, n=10, p=.5)
+print("Probability of getting more than 2 heads")
+print(prob_2)
