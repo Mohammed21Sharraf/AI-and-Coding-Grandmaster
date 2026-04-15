@@ -1,30 +1,23 @@
-def a_and_b(a, b):
+def prob_a_and_b(a, b, total):
+	# probability of event a
+	prob_a = orange/total
 
-	if a==1:
-		prob_student = 0.3
-		if b ==1:
-			prob_dining = 0.75
-		else:
-			prob_dining = 0.25
-		print("Probability of a given b:", prob_dining)
+	# probability of event b
+	prob_bga = blue/(total-1)
 
-	if a==2:
-		prob_student=0.7
-		if b==1:
-			prob_dining = 0.6
-		else:
-			prob_dining = 0.4
-		print("Probability of a given b:", prob_dining)
-	
-	prob_a_and_b = prob_student*prob_dining
-	return round(prob_a_and_b, 3)
+	# probability of intersection of events a and b
+	prob_AandB = prob_a * prob_bga
 
-print("Check the probability of any event occuring. First enter your choices.")
+	# add return statement here
+	return round(prob_AandB,3)
+  
 
-print("Is the student a Freshman? \n 1. Yes \n 2. No")
-a = int(input("Enter your choice (1/2): "))
+# taking input for total number of orange and blue balls
+orange = int(input("Enter number of orange balls "))
+blue = int(input("Enter number of blue balls "))
+total = orange+blue
 
-print("Is student eating in dining hall? \n 1. Yes \n 2. No")
-b = int(input("Enter your choice (1/2): "))
 
-print("Here is the probability of both the events occuring :", a_and_b(a, b))
+# call function for final result
+print('Probability of Getting 1st orange and 2nd blue ball: ')
+print(prob_a_and_b(orange, blue, total))
