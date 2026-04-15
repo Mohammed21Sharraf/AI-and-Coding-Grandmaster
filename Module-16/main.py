@@ -8,7 +8,7 @@ import seaborn as sns
 
 """####**Import Dataset**"""
 # Import dataset
-data = pd.read_csv('IMDB Dataset.csv')
+data = pd.read_csv('Titanic Dataset.csv')
 
 data.head(5)
 
@@ -16,37 +16,51 @@ data.head(5)
 
 data.isnull().sum()
 
-"""**No null values present -**
+"""**Null values present in Cabin -**
 
-#### **Plot Histogram for feature Runtime**
+#### **Quartiles of Feature Age**
 """
 
-plt.hist(data['Runtime'])
+age_q1 = np.quantile(data['Age'], 0.25)
+age_q2 = np.quantile(data['Age'], 0.50)
+age_q3 = np.quantile(data['Age'], 0.75)
 
-plt.ylabel("Count of movies")
-plt.xlabel("Runtime")
+print("Age Quartiles -")
+print("Q1 -", age_q1)
+print("Q2 -", age_q2)
+print("Q3 -", age_q3)
 
-"""#### **Plot Histogram for feature IMDB_Rating**"""
+"""#### **Interquartile Range of Feature Age**"""
 
-plt.hist(data['IMDB_Rating'])
-plt.ylabel("Count of movies")
-plt.xlabel("IMDB Rating")
+IQR_age = age_q3 - age_q1
+print("Interquartile Range :", IQR_age)
 
-"""#### **Define parameter bins_runtime for feature Runtime and plot histogram for it**"""
+"""#### **Plot Histogram for feature Age**"""
 
-data['Runtime'].unique()
+plt.hist(data['Age'])
+plt.ylabel("Count of Passengers")
+plt.xlabel("Age")
 
-bins_time = np.arange(80, 230, 10)
-plt.hist(data['Runtime'], edgecolor="black", bins=bins_time, color='g')
-plt.ylabel("Count of movies")
-plt.xlabel("Runtime")
+"""#### **Quartiles for feature Fare**"""
 
-"""#### **Define parameter bins_rating for feature IMDB_Rating and plot histogram for it**"""
+fare_q1 = np.quantile(data['Fare'], 0.25)
+fare_q2 = np.quantile(data['Fare'], 0.50)
+fare_q3 = np.quantile(data['Fare'], 0.75)
 
-data['IMDB_Rating'].unique()
+print("Fare Quartiles -")
+print("Q1 -", fare_q1)
+print("Q2 -", fare_q2)
+print("Q3 -", fare_q3)
 
-bins_rating = np.arange(8, 10, 0.20)
-plt.hist(data['IMDB_Rating'], edgecolor="black", bins=bins_rating, color='g')
-plt.ylabel("Count of movies")
-plt.xlabel("IMDB Rating")
-plt.xticks(bins_rating)
+"""#### **Interquartile Range of Feature Fare**"""
+
+IQR_fare = fare_q3 - fare_q1
+print("Interquartile Range :", IQR_fare)
+
+"""#### **Plot histogram for feature Fare**"""
+
+bins =np.arange(0,250,20)
+plt.hist(data['Fare'], bins=np.arange(1,250, 20))
+plt.ylabel("Count of Passengers")
+plt.xlabel("Fare")
+plt.xticks(bins)
