@@ -1,26 +1,30 @@
-def prob_a_or_b(a, b, all_possible_outcomes):
-	# probability of event a
-	prob_a = len(a)/len(all_possible_outcomes)
+def a_and_b(a, b):
 
-	# probability of event b
-	prob_b = len(b)/len(all_possible_outcomes)
+	if a==1:
+		prob_student = 0.3
+		if b ==1:
+			prob_dining = 0.75
+		else:
+			prob_dining = 0.25
+		print("Probability of a given b:", prob_dining)
 
-	# intersection of events a and b
-	inter = a.intersection(b)
+	if a==2:
+		prob_student=0.7
+		if b==1:
+			prob_dining = 0.6
+		else:
+			prob_dining = 0.4
+		print("Probability of a given b:", prob_dining)
+	
+	prob_a_and_b = prob_student*prob_dining
+	return round(prob_a_and_b, 3)
 
-	# probability of intersection of events a and b
-	prob_inter = len(inter)/len(all_possible_outcomes)
+print("Check the probability of any event occuring. First enter your choices.")
 
-	# add return statement here
-	return (prob_a + prob_b - prob_inter)
-  
+print("Is the student a Freshman? \n 1. Yes \n 2. No")
+a = int(input("Enter your choice (1/2): "))
 
-# rolling a die once and getting an even number or an odd number
-evens = {2, 4, 6}
-greater_than_two = {3, 4, 5, 6}
-all_possible_rolls = {1, 2, 3, 4, 5, 6}
+print("Is student eating in dining hall? \n 1. Yes \n 2. No")
+b = int(input("Enter your choice (1/2): "))
 
-# call function for final result
-print('Probability of Getting an even number or a number greater than 2')
-print(prob_a_or_b(evens, greater_than_two, all_possible_rolls))
-
+print("Here is the probability of both the events occuring :", a_and_b(a, b))
