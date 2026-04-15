@@ -4,15 +4,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+"""####**Import Dataset**"""
+
 from google.colab import files
 uploaded = files.upload()
 
-# Import dataset
 data = pd.read_csv('Titanic Dataset.csv')
-data.head(5)
 
-# Check the datatype
-data.dtypes
+data.head()
 
-# Check Null Values
-data.isnull().sum()
+"""####**Mean Value of Age and Fare**"""
+
+# Mean Value of age
+mean_age = np.mean(data['Age'])
+print("Mean Age of Passengers is - ",mean_age)
+
+# Mean Value of Fare
+mean_fare = np.mean(data['Fare'])
+print("Mean Fare is - ",mean_fare)
