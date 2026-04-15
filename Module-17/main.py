@@ -1,21 +1,13 @@
-import random
+# Create the two sets of two guest lists
+set1 = {'A', 'B', 'C', 'D', 'E'}
+set2 = {'B', 'D', 'V', 'X', 'Y', 'Z'}
 
-def pick_ball_experiment():
-	# defining our balls as lists
-	balls = ['Blue', 'Red', 'Green']
+# Find union of two sets
+union = set1.union(set2)
 
-	# "flipping" coins randomly
-	result = random.choice(balls)
+# Converting set into list 
+# to find total guests to be invited in party
+total_guests = list(union)
 
-	#Finding the probability 
-	pro = balls.count('Red')/len(balls)
-	print("Probability of Picking Red Ball is:", pro)
-
-	# checking if red ball was picked
-	if result == 'Red':
-		return 'Red Ball was Picked'
-	else:
-		return 'Better Luck Next Time'
-		
-res = pick_ball_experiment()
-print(res)	
+print("Total guests to be invited in party are :", len(total_guests))
+print("Guest List :", total_guests)
