@@ -7,36 +7,46 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 """####**Import Dataset**"""
-
 # Import dataset
-data = pd.read_csv('Weather Dataset.csv')
+data = pd.read_csv('IMDB Dataset.csv')
 
 data.head(5)
-
-data.info()
 
 """####**Check Null Values**"""
 
 data.isnull().sum()
 
-"""**No feature has any null values**
+"""**No null values present -**
 
-#### **Mean, Variance and Standard Deviation of Temperature (C)**
+#### **Plot Histogram for feature Runtime**
 """
 
-mean_temp = np.mean(data['Temperature (C)'])
-print("Mean Temperature is :", mean_temp)
+plt.hist(data['Runtime'])
 
-var_temp = np.var(data['Temperature (C)'])
-print("Variation of Temperature is :", var_temp)
+plt.ylabel("Count of movies")
+plt.xlabel("Runtime")
 
-standard_deviation_temp = np.std(data['Temperature (C)'])
-print("Standard Deviation of Temperature is :", standard_deviation_temp)
+"""#### **Plot Histogram for feature IMDB_Rating**"""
 
-"""#### **Mean, Variance and Standard Deviation of Temperature (C) for every month**"""
+plt.hist(data['IMDB_Rating'])
+plt.ylabel("Count of movies")
+plt.xlabel("IMDB Rating")
 
-for i in range(1, 13):
-  month = data.loc[data["month"] == i]["Temperature (C)"]
-  print("For month "+str(i))
-  print("Mean temperature is "+ str(np.mean(month)))
-  print("Standard deviation is "+ str(np.std(month))+"\n")
+"""#### **Define parameter bins_runtime for feature Runtime and plot histogram for it**"""
+
+data['Runtime'].unique()
+
+bins_time = np.arange(80, 230, 10)
+plt.hist(data['Runtime'], edgecolor="black", bins=bins_time, color='g')
+plt.ylabel("Count of movies")
+plt.xlabel("Runtime")
+
+"""#### **Define parameter bins_rating for feature IMDB_Rating and plot histogram for it**"""
+
+data['IMDB_Rating'].unique()
+
+bins_rating = np.arange(8, 10, 0.20)
+plt.hist(data['IMDB_Rating'], edgecolor="black", bins=bins_rating, color='g')
+plt.ylabel("Count of movies")
+plt.xlabel("IMDB Rating")
+plt.xticks(bins_rating)
