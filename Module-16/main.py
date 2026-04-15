@@ -13,35 +13,39 @@ data = pd.read_csv('Titanic Dataset.csv')
 
 data.head(5)
 
-"""#### **Check association between Embarked and Age**"""
+"""#### **Passengers belonging from which gender survived the most**"""
 
-sns.boxplot(data = data, x = 'Embarked', y = 'Age')
+sns.countplot(data['Gender'], hue=data['Survived'])
+
+"""#### **Passengers belonging from which PClass survived the most and the least**"""
+
+sns.countplot(data['Pclass'], hue=data['Survived'])
+
+"""#### **Highest number of passengers belong to which Age**"""
+
+sns.distplot(data['Age'],kde=False,bins=40)
+
+"""#### **Highest number of passengers belong to which Gender**"""
+
+sns.countplot(data['Gender'])
+
+"""#### **Is SibSp correlated/associated with Survived feature**"""
+
+sns.countplot(x='Survived', hue='SibSp', data=data, palette="mako")
+
+"""#### **Is Parch correlated/associated with Survived feature**"""
+
+sns.countplot(x='Survived', hue='Parch', data=data, palette="mako")
+
+"""#### **Is the feature Fare having normal distribution/spread of data**"""
+
+sns.distplot(data['Fare'])
 plt.show()
 
-"""- **There is too much overlapping in the boxplots, which means there is no much association between Embarked and Age**
+"""#### **Check the age group of majority of people belonging to PClass=1**"""
 
-#### **Check association between Survived and Fare, SibSp, Parch**
-"""
+sns.boxplot(x='Pclass',y='Age',data=data,palette='winter')
 
-plt.scatter(x = data['Fare'], y = data['Survived'])
-plt.ylabel('Survived')
-plt.xlabel('Fare')
-plt.show()
+"""#### **Check the correlation of all the features with target variable ‘Survived’**"""
 
-plt.scatter(x = data['Parch'], y = data['Survived'])
-plt.ylabel('Survived')
-plt.xlabel('Parch')
-plt.show()
-
-plt.scatter(x = data['SibSp'], y = data['Survived'])
-plt.ylabel('Survived')
-plt.xlabel('SibSp')
-plt.show()
-
-"""- **There is association of features Parch, SibSp with Survived**
-
-#### **Check association between Gender and Embarked**
-"""
-
-association_categorical = pd.crosstab(data['Gender'], data['Embarked'])
-print(association_categorical)
+sns.heatmap(data.corr())
