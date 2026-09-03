@@ -1,140 +1,62 @@
-import numpy
+import pandas as pd
+import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
 
-# number of sample
-num = [1, 10, 50, 100]
-# list of sample meansimport nltk
-from nltk.chat.util import Chat, reflections
+Titanic = pd.read_csv(r"Titanic.csv")
+Titanic.head()
 
-reflections = {
-  "i am"       : "you are",
-  "i was"      : "you were",
-  "i"          : "you",
-  "i'm"        : "you are",
-  "i'd"        : "you would",
-  "i've"       : "you have",
-  "i'll"       : "you will",
-  "my"         : "your",
-  "you are"    : "I am",
-  "you were"   : "I was",
-  "you've"     : "I have",
-  "you'll"     : "I will",
-  "your"       : "my",
-  "yours"      : "mine",
-  "you"        : "me",
-  "me"         : "you"
-}
+Titanic.shape
 
-pairs = [
-    [
-        r"my name is (.*)",
-        ["Hello %1, How are you today ?",]
-    ],
-    [
-        r"hi|hey|hello",
-        ["Hello", "Hey there",]
-    ], 
-    [
-        r"what is your name ?",
-        ["I am a bot created by Codingal Edu. pvt. Lim. you can call me Jarvis!",]
-    ],
-    [
-        r"how are you ?",
-        ["I'm doing goodnHow about You ?",]
-    ],
-    [
-        r"sorry (.*)",
-        ["Its alright","Its OK, never mind",]
-    ],
-    [
-        r"I am fine",
-        ["Great to hear that, How can I help you?",]
-    ],
-    [
-        r"i'm (.*) doing good",
-        ["Nice to hear that","How can I help you?:)",]
-    ],
-    [
-        r"(.*) age?",
-        ["I'm a computer program dudenSeriously you are asking me this?",]
-    ],
-    [
-        r"what (.*) want ?",
-        ["Make me an offer I can't refuse",]
-    ],
-    [
-        r"(.*) created ?",
-        ["Shravan created me using Python's NLTK library ","top secret ;)",]
-    ],
-    [
-        r"(.*) (location|city) ?",
-        ['Bangalore, Karnataka',]
-    ],
-    [
-        r"how is weather in (.*)?",
-        ["Weather in %1 is awesome like always","Too hot man here in %1","Too cold man here in %1","Never even heard about %1"]
-    ],
-    [
-        r"i work in (.*)?",
-        ["%1 is an Amazing company, I have heard about it. But they are in huge loss these days.",]
-    ],
-    [
-        r"(.*)raining in (.*)",
-        ["No rain since last week here in %2","Damn its raining too much here in %2"]
-    ],
-    [
-        r"how (.*) health(.*)",
-        ["I'm a computer program, so I'm always healthy ",]
-    ],
-    [
-        r"(.*) (sports|game) ?",
-        ["I'm a very big fan of Football and Cricket",]
-    ],
-    [
-        r"who (.*) sportsperson ?",
-        ["Messy","Ronaldo","Roony", "Virat", "M.S. Dhoni", "Rohit"]
-    ],
-    [
-        r"who (.*) (moviestar|actor)?",
-        ["Benedict Cumberbatch"]
-    ],
-    [
-        r"i am looking for online guides and courses to learn data science, can you suggest?",
-        ["Jarvis_Tech has many great articles with each step explanation along with code, you can explore"]
-    ],
-    [
-        r"quit",
-        ["BBye take care. See you soon :) ","It was nice talking to you. See you soon :)"]
-    ],
-]
+Titanic.isnull().sum()
 
-def chat():
-    print("Hi! I am a chatbot created by Codingal Edu. Pvt. Lim. for your service")
-    chat = Chat(pairs, reflections)
-    chat.converse()
-#initiate the conversation
-if __name__ == "__main__":
-    chat()
-means = []
+sns.heatmap(Titanic.isnull(), cmap="spring")
 
-# Generating 1, 10, 30, 100 random numbers from -40 to 40
-# taking their mean and appending it to list means.
-for j in num:
-	# Generating seed so that we can get same result
-	# every time the loop is run...
-	numpy.random.seed(1)
-	x = [numpy.mean(
-		numpy.random.randint(
-			-40, 40, j)) for _i in range(1000)]
-	means.append(x)
-k = 0
+#Since the highest null values are found in "deck" coloumn so dropping it respectively..
 
-# plotting all the means in one figure
-fig, ax = plt.subplots(2, 2, figsize =(6,6))
-for i in range(0, 2):
-	for j in range(0, 2):
-		# Histogram for each x stored in means
-		ax[i, j].hist(means[k], 10, density = True)
-		ax[i, j].set_title(label = num[k])
-		k = k + 1
-plt.show()
+#Printing the original Dataset again
+
+Titanic.head()
+
+#Dropping the deck coloumn
+
+Titanic.drop("deck", axis=1, inplace=True)
+
+#Printing the Dataset after dropping the coloumn
+
+Titanic.head()
+
+Titanic.dropna(inplace=True)
+
+sns.heatmap(Titanic.isnull(), cbar=False)
+
+#As you can see no null values found
+
+#Now all the null values have been removed "CHECK"
+
+Titanic.isnull().sum()
+
+#Simplifying the data more by converting the string data types to integer.
+
+pd.get_dummies(Titanic["sex"]).head()
+
+sex = pd.get_dummies(Titanic["sex"], drop_first=True)
+
+sex.head(4)
+
+#If we observe embark_town there are only two data types present which can be split in the form of integers
+
+pd.get_dummies(Titanic["embarked"]).head(4)
+
+arked = pd.get_dummies(Titanic["embarked"], drop_first=True)
+
+#Similarly for pclass
+
+pclass = pd.get_dummies(Titanic["pclass"], drop_first=True)
+
+pclass.head(4)
+
+Titanic = pd.concat([Titanic, sex, pclass], axis=1)
+
+#Printing the Updated Dataset
+Titanic.head()
