@@ -1,62 +1,21 @@
-import pandas as pd
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-Titanic = pd.read_csv(r"Titanic.csv")
-Titanic.head()
-
-Titanic.shape
-
-Titanic.isnull().sum()
-
-sns.heatmap(Titanic.isnull(), cmap="spring")
-
-#Since the highest null values are found in "deck" coloumn so dropping it respectively..
-
-#Printing the original Dataset again
-
-Titanic.head()
-
-#Dropping the deck coloumn
-
-Titanic.drop("deck", axis=1, inplace=True)
-
-#Printing the Dataset after dropping the coloumn
-
-Titanic.head()
-
-Titanic.dropna(inplace=True)
-
-sns.heatmap(Titanic.isnull(), cbar=False)
-
-#As you can see no null values found
-
-#Now all the null values have been removed "CHECK"
-
-Titanic.isnull().sum()
-
-#Simplifying the data more by converting the string data types to integer.
-
-pd.get_dummies(Titanic["sex"]).head()
-
-sex = pd.get_dummies(Titanic["sex"], drop_first=True)
-
-sex.head(4)
-
-#If we observe embark_town there are only two data types present which can be split in the form of integers
-
-pd.get_dummies(Titanic["embarked"]).head(4)
-
-arked = pd.get_dummies(Titanic["embarked"], drop_first=True)
-
-#Similarly for pclass
-
-pclass = pd.get_dummies(Titanic["pclass"], drop_first=True)
-
-pclass.head(4)
-
-Titanic = pd.concat([Titanic, sex, pclass], axis=1)
-
-#Printing the Updated Dataset
-Titanic.head()
+# example of binary classification task
+from numpy import where
+from collections import Counter
+from sklearn.datasets import make_blobs
+from matplotlib import pyplot
+# define dataset
+X, y = make_blobs(n_samples=1000, centers=2, random_state=1)
+# summarize dataset shape
+print(X.shape, y.shape)
+# summarize observations by class label
+counter = Counter(y)
+print(counter)
+# summarize first few examples
+for i in range(10):
+    print(X[i], y[i])
+# plot the dataset and color the by class label
+for label, _ in counter.items():
+    row_ix = where(y == label)[0]
+    pyplot.scatter(X[row_ix, 0], X[row_ix, 1], label=str(label))
+pyplot.legend()
+pyplot.show()
