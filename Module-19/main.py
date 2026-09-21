@@ -1,74 +1,44 @@
-# Commented out IPython magic to ensure Python compatibility.
-#Importing requirede libraries
-
-import pandas as pd
-from matplotlib import pyplot as plt
-from google.colab import files
-# %matplotlib inline
-
-#Importing Dataset required
-
-uploaded = files.upload()
-df = pd.read_csv("insurance_data.csv")
-df.head()
-
-#Ploting the dataset
-
-plt.scatter(df.age,df.bought_insurance,marker='+',color='red')
-
-#Spliting the training Values usijg sklearn
-
-from sklearn.model_selection import train_test_split
-
-#Defining the Training and Testing Variables
-
-X_train, X_test, y_train, y_test = train_test_split(df[['age']],df.bought_insurance,train_size=0.8)
-
-X_test
-
-#Using Logistic Regression Algorithmn
-
+#Importing dataset and libraries
 from sklearn.linear_model import LogisticRegression
-model = LogisticRegression()
+from sklearn import datasets
+import numpy as np
+import matplotlib.pyplot as plt
 
-#Fitting the model
+# import some data to play with
+iris = datasets.load_iris()
+X = iris.data[:, :2]  # we only take the first two features.
+Y = iris.target
 
-model.fit(X_train, y_train)
 
-X_test
+# Create an instance of Logistic Regression Classifier
+logreg = LogisticRegression(solver='lbfgs')
 
-#Predicting the Y
+# Fit the data
+logreg.fit(X, Y)
 
-y_predicted = model.predict(X_test)
+x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
+y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
+h = .02  # step size in the mesh
+xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+Z = logreg.predict(np.c_[xx.ravel(), yy.ravel()])
 
-model.predict_proba(X_test)
 
-#Testing model
+# Put the result into a color plot
+Z = Z.reshape(xx.shape)
+plt.figure(1, figsize=(4, 3))
+plt.pcolormesh(xx, yy, Z, cmap=plt.cm.Paired)
 
-model.score(X_test,y_test)
+# Plot also the training points
+plt.scatter(X[:, 0], X[:, 1], c=Y, edgecolors='k', cmap=plt.cm.Paired)
+plt.xlabel('Sepal length')
+plt.ylabel('Sepal width')
 
-y_predicted
+#Fitting the plots
+plt.xlim(xx.min(), xx.max())
+plt.ylim(yy.min(), yy.max())
+plt.xticks(())
+plt.yticks(())
 
-X_test
-
-model.coef_
-
-model.intercept_
-
-import math
-def sigmoid(x):
-  return 1 / (1 + math.exp(-x))
-
-def prediction_function(age):
-    z = 0.042 * age - 1.53 # 0.04150133 ~ 0.042 and -1.52726963 ~ -1.53
-    y = sigmoid(z)
-    return y
-
-age = 35
-prediction_function(age)
-
-age = 43
-prediction_function(age)
-
-#0.485 is more than 0.5 which means person with 43 will buy the insurance
-
+#Displaying the Plots
+plt.show()
+logreg.score(X, Y)
