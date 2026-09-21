@@ -1,38 +1,32 @@
-#Maximum margin separating hyperplane
-
-print(__doc__)
-
+# Step 1: Import packages, functions, and classes
 import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.linear_model import SGDClassifier
-from sklearn.datasets import make_blobs
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report, confusion_matrix
 
-# we create 50 separable points
-X, Y = make_blobs(n_samples=50, centers=2, random_state=0, cluster_std=0.60)
+# Step 2: Get data
+x = np.arange(10).reshape(-1, 1)
+y = np.array([0, 1, 0, 0, 1, 1, 1, 1, 1, 1])
 
-# fit the model
-clf = SGDClassifier(loss="hinge", alpha=0.01, max_iter=200)
+# Step 3: Create a model and train it
+model = LogisticRegression(solver='liblinear', C=10.0, random_state=0)
+model.fit(x, y)
 
-clf.fit(X, Y)
+# Step 4: Evaluate the model
+p_pred = model.predict_proba(x)
+y_pred = model.predict(x)
+score_ = model.score(x, y)
+conf_m = confusion_matrix(y, y_pred)
+report = classification_report(y, y_pred)
 
-# plot the line, the points, and the nearest vectors to the plane
-xx = np.linspace(-1, 5, 10)
-yy = np.linspace(-1, 5, 10)
+print('x:', x, sep='\n')
 
-X1, X2 = np.meshgrid(xx, yy)
-Z = np.empty(X1.shape)
-for (i, j), val in np.ndenumerate(X1):
-    x1 = val
-    x2 = X2[i, j]
-    p = clf.decision_function([[x1, x2]])
-    Z[i, j] = p[0]
-levels = [-1.0, 0.0, 1.0]
-linestyles = ['dashed', 'solid', 'dashed']
-colors = 'k'
-plt.contour(X1, X2, Z, levels, colors=colors, linestyles=linestyles)
-plt.scatter(X[:, 0], X[:, 1], c=Y, cmap=plt.cm.Paired,
-            edgecolor='black', s=20)
+print('y:', y, sep='\n', end='\n\n')
 
-plt.axis('tight')
-plt.show()
+print('intercept:', model.intercept_)
+
+print('coef:', model.coef_, end='\n\n')
+
+print('p_pred:', p_pred, sep='\n', end='\n\n')
+
+print('y_pred:', y_pred, end='\n\n')
 
