@@ -1,44 +1,74 @@
-#Importing dataset and libraries
-from sklearn.linear_model import LogisticRegression
-from sklearn import datasets
+# Recommendation Engine — Part 1
+
+### Step 1 — Import Libraries
+
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# import some data to play with
-iris = datasets.load_iris()
-X = iris.data[:, :2]  # we only take the first two features.
-Y = iris.target
+
+### Step 2 — Upload Ratings Data
+
+from google.colab import files
+
+print("Select and upload 'ratings.csv'")
+uploaded = files.upload()
+ratings_filename = list(uploaded.keys())[0]
+
+ratings_df = pd.read_csv(ratings_filename)
+ratings_df.head()
 
 
-# Create an instance of Logistic Regression Classifier
-logreg = LogisticRegression(solver='lbfgs')
+### Step 3 — Upload Movies Data
 
-# Fit the data
-logreg.fit(X, Y)
+print("Select and upload 'movies.csv'")
+uploaded = files.upload()
+movies_filename = list(uploaded.keys())[0]
 
-x_min, x_max = X[:, 0].min() - .5, X[:, 0].max() + .5
-y_min, y_max = X[:, 1].min() - .5, X[:, 1].max() + .5
-h = .02  # step size in the mesh
-xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
-Z = logreg.predict(np.c_[xx.ravel(), yy.ravel()])
+movies_df = pd.read_csv(movies_filename)
+movies_df.head()
 
 
-# Put the result into a color plot
-Z = Z.reshape(xx.shape)
-plt.figure(1, figsize=(4, 3))
-plt.pcolormesh(xx, yy, Z, cmap=plt.cm.Paired)
+### Step 4 — Clean Movie Titles
 
-# Plot also the training points
-plt.scatter(X[:, 0], X[:, 1], c=Y, edgecolors='k', cmap=plt.cm.Paired)
-plt.xlabel('Sepal length')
-plt.ylabel('Sepal width')
+movies_df['year'] = movies_df.title.str.extract(r'(\(\d\d\d\d\))', expand=True)
+movies_df['year'] = movies_df.year.str.extract(r'(\d\d\d\d)', expand=True)
 
-#Fitting the plots
-plt.xlim(xx.min(), xx.max())
-plt.ylim(yy.min(), yy.max())
-plt.xticks(())
-plt.yticks(())
+movies_df['title'] = movies_df.title.str.replace(r'(\(\d\d\d\d\))', '', regex=True)
+movies_df['title'] = movies_df['title'].apply(lambda x: x.strip())
 
-#Displaying the Plots
+movies_df.head()
+
+
+### Step 5 — One-Hot Encode Genres
+
+movies_df['genres'] = movies_df.genres.str.split('|')
+
+movies_copy = movies_df.copy()
+for index, row in movies_df.iterrows():
+    for genre in row['genres']:
+        movies_copy.at[index, genre] = 1
+
+movies_copy = movies_copy.fillna(0)
+movies_copy.head()
+
+
+### Step 6 — Drop Timestamp Column
+
+ratings_df = ratings_df.drop(['timestamp'], axis=1)
+ratings_df.head()
+
+
+### Step 7 — Plot Genre Counts
+
+genre_columns = movies_copy.drop(['movieId', 'title', 'genres', 'year'], axis=1)
+genre_counts = genre_columns.sum().sort_values(ascending=False)
+
+plt.figure(figsize=(10, 5))
+plt.bar(genre_counts.index, genre_counts.values, color='#4C9AFF')
+plt.title('Movies Per Genre')
+plt.xlabel('Genre')
+plt.ylabel('Number of Movies')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
 plt.show()
-logreg.score(X, Y)
